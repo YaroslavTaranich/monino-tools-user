@@ -3,7 +3,6 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactElement, useState } from "react";
-
 import styles from "./tabs.module.scss";
 
 interface TabsProps {
