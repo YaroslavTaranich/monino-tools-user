@@ -1,0 +1,11 @@
+.rub {
+  font-size: 4rem;
+  background-color: #ecb600;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  background-position: -50% -50%;
+  text-align: center;
+  line-height: 4.6rem;
+}

@@ -1,0 +1,39 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 4rem 4rem;
+    // background: url('../../assets/delivery.jpg') no-repeat;
+    background-color: var(--bg-transparent-black);
+    // background-size: cover;
+    // min-height: 100vh;
+    gap: 2rem;
+
+    @media screen and (max-width: 650px) {
+        padding: 0 1rem 1rem;
+    }
+}
+
+.price {
+    background-color: var(--bg-header);
+    width: 100%;
+    align-self: flex-end;
+    border-radius: 3px;
+    overflow: hidden;
+
+    & p,
+    & li {
+        font-size: 2rem;
+        margin-bottom: 0rem;
+        padding: 1rem 2rem;
+        padding-bottom: 0;
+    }
+
+    & ul {
+        font-weight: 600;
+        margin: 2rem;
+    }
+
+    @media screen and (max-width: 750px) {
+        width: 100%;
+    }
+}

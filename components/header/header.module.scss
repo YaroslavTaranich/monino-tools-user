@@ -1,0 +1,73 @@
+.header {
+  background: var(--bg-header-dark);
+
+  &__container {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
+
+
+  &__subtext {
+    font-size: 1.2rem;
+    color: var(--text-light);
+  }
+
+  &__logoText {
+    font-size: 9px;
+    letter-spacing: .05px;
+    color: var(--text-light);
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+
+    @media screen and (max-width: 600px) {
+      font-size: 7px;
+      letter-spacing: 0;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &>svg {
+      width: 200px;
+
+      @media screen and (max-width: 600px) {
+        width: 150px;
+      }
+    }
+  }
+
+  &__phone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    &>a {
+      font-size: 2rem;
+      line-height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      color: var(--text-light);
+
+      &>svg {
+        width: 24px;
+        height: 24px;
+        color: var(--brand-color);
+      }
+
+    }
+  }
+}

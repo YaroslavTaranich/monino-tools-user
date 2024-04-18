@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+
+:root {
+  --main-background-color: #fff9f5;
+  --brand-color: #f37021;
+  --text-black: #111;
+  --block-background: #fdf7d1;
+  --border-color: #bfb0b0;
+
+  --white: #fff;
+
+  --layout-max-width: 1200px;
+  --card-max-width: 320px;
+
+  /* colors */
+
+  --text-light: rgb(247, 248, 239);
+  --text-color-link: #d1d3d4;
+  --text-color-light: #eee;
+  --text-color-label: #999;
+  --text-color-secondary: #666;
+  --text-color-primary: #333;
+
+  --bg-header: rgb(251, 244, 235);
+  --bg-header-dark: #58595bdd;
+  --bg-transparent: rgba(251, 244, 235, 0.85);
+  --bg-transparent-black: #6161615e;
+  --bg-color: #f8f8f8;
+
+  --modile-menu-bg: #58595bd7;
+
+  --button-bg: #ecb600;
+  --button-color: #58595b;
+  --button-bg-active: #58595b;
+  --button-color-active: #f37021;
+
+  --black-light-shadow: rgba(0, 0, 0, 0.05);
+  --black-medium-shadow: rgba(0, 0, 0, 0.25);
+  --black-dark-shadow: rgba(0, 0, 0, 0.5);
+
+  --white-light-shadow: rgba(255, 255, 255, 0.05);
+  --white-medium-shadow: rgba(255, 255, 255, 0.25);
+  --white-dark-shadow: rgba(255, 255, 255, 0.5);
+
+  --tabs-bg: #f9f6f3;
+  --tabs-border: rgba(250, 235, 215, 1);
+  --tabs-active: #f37021;
+  --tabs-border-hover: #f3722183;
+
+  --card-bg: rgba(250, 235, 215, 0.8);
+  --card-bg-hover: rgba(250, 235, 215, 0.89);
+  --card-bg-active: rgba(250, 235, 215, 0.979);
+
+  --error: rgb(213, 7, 7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-black);
+}
+
+main {
+  max-width: var(--layout-max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:focus,
+a:visited {
+  color: var(--text-color-primary);
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  background-color: white;
+  transition: background-color 5000s ease-in-out 1110s;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 50%;
+  }
+}

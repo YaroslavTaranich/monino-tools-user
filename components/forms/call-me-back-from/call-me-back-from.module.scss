@@ -1,0 +1,19 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 450px;
+    max-width: 100%;
+    min-height: 300px;
+    gap: 10px;
+
+    &__title {
+        margin: .6rem 0;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 2rem;
+    }
+}
