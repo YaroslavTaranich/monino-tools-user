@@ -1,11 +1,11 @@
-import React from "react";
-import { Benefits } from "@/components/benefits";
-import { ToolOrder } from "@/components/tool-order";
-import { Title, Tabs } from "@/components/UI";
-import { Specification } from "@/components/specification";
-import { getAllCategories, getAllTools } from "@/services/api";
-import { faGear, faMessage } from "@fortawesome/free-solid-svg-icons";
-import { Metadata } from "next";
+import React from 'react';
+import { faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { Metadata } from 'next';
+import { Benefits } from '@/components/benefits';
+import { ToolOrder } from '@/components/tool-order';
+import { Title, Tabs } from '@/components/UI';
+import { Specification } from '@/components/specification';
+import { getAllCategories, getAllTools } from '@/services/api';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -37,7 +37,7 @@ export async function generateMetadata({
     title: current?.html_title,
     description: current?.html_description,
     openGraph: {
-      images: [process.env.API_URL + "file/" + current?.image],
+      images: [`${process.env.API_URL}file/${current?.image}`],
       title: current?.html_title,
       description: current?.html_description,
     },
@@ -45,16 +45,16 @@ export async function generateMetadata({
 }
 
 async function Page({ params }: IPageProps) {
-  const tool = (await getAllTools()).find((tool) => tool.name === params.tool);
+  const tool = (await getAllTools()).find((currentTool) => currentTool.name === params.tool);
 
   if (!tool) return null;
   const tabs = [
     {
-      label: "Характеристики",
+      label: 'Характеристики',
       content: <Specification data={tool.specification} />,
       icon: faGear,
     },
-    { label: "Описание", content: tool.description, icon: faMessage },
+    { label: 'Описание', content: tool.description, icon: faMessage },
   ];
 
   return (

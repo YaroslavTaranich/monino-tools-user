@@ -1,3 +1,3 @@
-import AllCategoriesList from "./all-categories-list";
+import AllCategoriesList from './all-categories-list';
 
 export { AllCategoriesList };

@@ -1,6 +1,4 @@
-const makeUrl = (url: string[]) => {
-  return process.env.API_URL + url.join("/");
-};
+const makeUrl = (url: string[]) => process.env.API_URL + url.join('/');
 
 export interface ICategory {
   id: number;
@@ -36,20 +34,20 @@ export interface ITool {
 }
 
 export const getAllCategories = async () => {
-  const res = await fetch(makeUrl(["category"]));
+  const res = await fetch(makeUrl(['category']));
 
   if (!res.ok) {
-    throw new Error("Не удалось загрузить категории");
+    throw new Error('Не удалось загрузить категории');
   }
 
   return (await res.json()) as ICategory[];
 };
 
 export const getAllTools = async () => {
-  const res = await fetch(makeUrl(["tools"]));
+  const res = await fetch(makeUrl(['tools']));
 
   if (!res.ok) {
-    throw new Error("Не удалось загрузить инструменты");
+    throw new Error('Не удалось загрузить инструменты');
   }
 
   return (await res.json()) as ITool[];

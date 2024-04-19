@@ -1,8 +1,8 @@
-import { getAllCategories } from "@/services/api";
-import { Title } from "@/components/UI";
-import { Benefits } from "@/components/benefits";
-import { AllCategoriesList } from "@/components/all-categories-list";
-import { DeliverySection } from "@/components/delivery-section";
+import { getAllCategories } from '@/services/api';
+import { Title } from '@/components/UI';
+import { Benefits } from '@/components/benefits';
+import { AllCategoriesList } from '@/components/all-categories-list';
+import { DeliverySection } from '@/components/delivery-section';
 
 export default async function Home() {
   const categories = await getAllCategories();

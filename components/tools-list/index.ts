@@ -1,3 +1,3 @@
-import ToolsList from "./tools-list";
+import ToolsList from './tools-list';
 
 export { ToolsList };

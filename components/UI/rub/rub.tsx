@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes } from 'react';
 
-import styles from "./rub.module.css";
+import styles from './rub.module.css';
 
 function Rub(props: HTMLAttributes<HTMLSpanElement>) {
   return (

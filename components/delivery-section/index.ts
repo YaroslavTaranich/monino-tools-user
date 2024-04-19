@@ -1,3 +1,3 @@
-import DeliverySection from "./delivery-section";
+import DeliverySection from './delivery-section';
 
 export { DeliverySection };

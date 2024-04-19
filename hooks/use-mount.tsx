@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export const useMount = (opened: boolean, duration: number) => {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     if (opened && !mounted) {
-      setMounted(true)
+      setMounted(true);
     } else if (!opened && mounted) {
       setTimeout(() => {
-        setMounted(false)
-      }, duration)
+        setMounted(false);
+      }, duration);
     }
-  }, [opened])
+  }, [opened]);
 
-  return mounted
-}
+  return mounted;
+};

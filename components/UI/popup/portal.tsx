@@ -1,12 +1,12 @@
-import { ReactElement, useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
+import { ReactElement, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 interface PortalProps {
   children: ReactElement | ReactElement[];
 }
 
 function Portal({ children }: PortalProps) {
-  const containerRef = useRef(document.createElement("div"));
+  const containerRef = useRef(document.createElement('div'));
 
   useEffect(() => {
     const node = containerRef.current;

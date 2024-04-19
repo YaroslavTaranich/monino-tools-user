@@ -1,26 +1,26 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from 'react';
 
-import styles from "./title.module.scss";
+import styles from './title.module.scss';
 
 interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
   children: string;
-  variant?: "primary" | "secondary";
+  variant?: 'primary' | 'secondary';
   number?: 1 | 2 | 3 | 4;
 }
 
 function Title({
   children,
-  variant = "primary",
+  variant = 'primary',
   number = 1,
   ...props
 }: TitleProps) {
   return React.createElement(
-    "h" + number,
+    `h${number}`,
     {
       ...props,
       className: styles[variant!],
     },
-    children
+    children,
   );
 }
 

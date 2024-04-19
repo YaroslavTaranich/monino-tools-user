@@ -1,6 +1,6 @@
-import { ChangeEvent, forwardRef, HTMLAttributes } from "react";
+import { ChangeEvent, forwardRef, HTMLAttributes } from 'react';
 
-import styles from "./radio-input.module.scss";
+import styles from './radio-input.module.scss';
 
 interface RadioInputProps extends HTMLAttributes<HTMLInputElement> {
   name: string;
@@ -10,7 +10,9 @@ interface RadioInputProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(
-  ({ name, value, label, onChange, ...props }, ref) => (
+  ({
+    name, value, label, onChange, ...props
+  }, ref) => (
     <label htmlFor={value} className={styles.radio}>
       <input
         ref={ref}
@@ -24,9 +26,9 @@ const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(
       />
       <span className={styles.radio__label}>{label}</span>
     </label>
-  )
+  ),
 );
 
-RadioInput.displayName = "RadioInput";
+RadioInput.displayName = 'RadioInput';
 
 export default RadioInput;

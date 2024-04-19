@@ -1,7 +1,7 @@
-import { getAllCategories, getAllTools } from "@/services/api";
-import { Title } from "@/components/UI";
-import { ToolsList } from "@/components/tools-list";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+import { getAllCategories, getAllTools } from '@/services/api';
+import { Title } from '@/components/UI';
+import { ToolsList } from '@/components/tools-list';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -31,7 +31,7 @@ export async function generateMetadata({
     title: current?.html_title,
     description: current?.html_description,
     openGraph: {
-      images: [process.env.API_URL + "file/" + current?.image],
+      images: [`${process.env.API_URL}file/${current?.image}`],
       title: current?.html_title,
       description: current?.html_description,
     },
@@ -40,10 +40,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: IPageProps) {
   const category = (await getAllCategories()).find(
-    (category) => category.name === params.category
+    (cat) => cat.name === params.category,
   );
   const tools = (await getAllTools()).filter(
-    (tool) => tool.categoryId === category?.id
+    (tool) => tool.categoryId === category?.id,
   );
 
   if (!category) return null;
@@ -51,7 +51,7 @@ export default async function Page({ params }: IPageProps) {
   return (
     <div>
       <Title>{category.title}</Title>
-      <ToolsList tools={tools} categoryName={category.name || ""} />
+      <ToolsList tools={tools} categoryName={category.name || ''} />
     </div>
   );
 }

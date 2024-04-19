@@ -1,4 +1,4 @@
-import styles from "./price-selector.module.scss";
+import styles from './price-selector.module.scss';
 
 interface PriceSelectorButtonProps {
   days: number;
@@ -12,11 +12,11 @@ function PriceSelectorButton({
   onClick,
 }: PriceSelectorButtonProps) {
   const buttonClasses = [styles.button];
-  if (isActive) buttonClasses.push(styles["button--active"]);
+  if (isActive) buttonClasses.push(styles['button--active']);
 
   return (
     <button
-      className={buttonClasses.join(" ")}
+      className={buttonClasses.join(' ')}
       type="button"
       onClick={onClick}
       aria-label={`Дней аренды: ${days}`}

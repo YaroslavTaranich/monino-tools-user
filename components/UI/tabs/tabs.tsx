@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactElement, useState } from "react";
-import styles from "./tabs.module.scss";
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ReactElement, useState } from 'react';
+import styles from './tabs.module.scss';
 
 interface TabsProps {
   tabs: {
@@ -13,10 +13,10 @@ interface TabsProps {
   }[];
 }
 
-const activeButtonClasses = [styles.button, styles["button--active"]];
+const activeButtonClasses = [styles.button, styles['button--active']];
 const activeContentItemClasses = [
   styles.content__item,
-  styles["content__item--active"],
+  styles['content__item--active'],
 ];
 
 function Tabs({ tabs }: TabsProps) {
@@ -30,7 +30,7 @@ function Tabs({ tabs }: TabsProps) {
             key={tab.label}
             type="button"
             className={
-              selected === index ? activeButtonClasses.join(" ") : styles.button
+              selected === index ? activeButtonClasses.join(' ') : styles.button
             }
             onClick={() => setSelected(index)}
             aria-label={tab.label}
@@ -48,11 +48,11 @@ function Tabs({ tabs }: TabsProps) {
             key={tab.label}
             className={
               selected === index
-                ? activeContentItemClasses.join(" ")
+                ? activeContentItemClasses.join(' ')
                 : styles.content__item
             }
           >
-            {typeof tab.content === "string" ? (
+            {typeof tab.content === 'string' ? (
               <p className={styles.content__text}>{tab.content}</p>
             ) : (
               tab.content

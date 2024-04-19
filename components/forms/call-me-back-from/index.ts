@@ -1,3 +1,3 @@
-import CallMeBackFrom from "./call-me-back-from";
+import CallMeBackFrom from './call-me-back-from';
 
 export { CallMeBackFrom };

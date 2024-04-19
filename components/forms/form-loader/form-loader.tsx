@@ -1,4 +1,4 @@
-import styles from "./form-loader.module.scss";
+import styles from './form-loader.module.scss';
 
 function FormLoader() {
   return (

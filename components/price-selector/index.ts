@@ -1,3 +1,3 @@
-import PriceSelector from "./price-selector";
+import PriceSelector from './price-selector';
 
 export { PriceSelector };

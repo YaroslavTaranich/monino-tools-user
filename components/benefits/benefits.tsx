@@ -3,34 +3,34 @@ import {
   faScrewdriverWrench,
   faTruck,
   faWallet,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
-import styles from "./benefits.module.scss";
-import BenefitsCard from "./benefits-card";
-import Title from "../UI/title/title";
+import styles from './benefits.module.scss';
+import BenefitsCard from './benefits-card';
+import Title from '../UI/title/title';
 
 const cards = [
   {
-    title: "Исправный инструмент",
-    text: "Вы всегда получите инструмент готовый к работе. Проверка и обслуживание после каждого клиента.",
+    title: 'Исправный инструмент',
+    text: 'Вы всегда получите инструмент готовый к работе. Проверка и обслуживание после каждого клиента.',
     icon: faGears,
     link: null,
   },
   {
-    title: "Арендовать выгоднее",
-    text: "Цена аренды меньше 7% от стоимости инструмета. И Вам не нужно его хранить и обслуживать!",
+    title: 'Арендовать выгоднее',
+    text: 'Цена аренды меньше 7% от стоимости инструмета. И Вам не нужно его хранить и обслуживать!',
     icon: faWallet,
     link: null,
   },
   {
-    title: "Доставка и возврат",
-    text: "Вы можете заказать доставку до вас и обратно!",
+    title: 'Доставка и возврат',
+    text: 'Вы можете заказать доставку до вас и обратно!',
     icon: faTruck,
-    link: "/delivery",
+    link: '/delivery',
   },
   {
-    title: "Ремонт при поломке",
-    text: "В случае неисправности в процессе работы, проконсультируем по телефону, либо приедем и починим!",
+    title: 'Ремонт при поломке',
+    text: 'В случае неисправности в процессе работы, проконсультируем по телефону, либо приедем и починим!',
     icon: faScrewdriverWrench,
     link: null,
   },

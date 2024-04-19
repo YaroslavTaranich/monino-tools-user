@@ -1,10 +1,12 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./popup.module.scss";
-import animationStyles from "./animation.module.css";
-import { ANIMATION_TIME } from "./const";
+import {
+  ReactElement, useEffect, useRef, useState,
+} from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './popup.module.scss';
+import animationStyles from './animation.module.css';
+import { ANIMATION_TIME } from './const';
 
 const overlayAnimation = {
   enter: animationStyles.overlayEnter,
@@ -33,7 +35,7 @@ function Layout({ open, onClose, children }: LayoutProps) {
   const [animationIn, setAnimationIn] = useState(false);
 
   const keyHandler = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       onClose();
     }
   };
@@ -41,18 +43,18 @@ function Layout({ open, onClose, children }: LayoutProps) {
   useEffect(() => {
     setAnimationIn(open);
     if (open) {
-      document.getElementById("root")?.setAttribute("inert", "true");
-      document.body.style.overflow = "hidden";
+      document.getElementById('root')?.setAttribute('inert', 'true');
+      document.body.style.overflow = 'hidden';
     } else {
-      document.getElementById("root")?.removeAttribute("inert");
-      document.body.style.overflow = "";
+      document.getElementById('root')?.removeAttribute('inert');
+      document.body.style.overflow = '';
     }
   }, [open]);
 
   useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
+    window.addEventListener('keydown', keyHandler);
     return () => {
-      window.addEventListener("keydown", keyHandler);
+      window.addEventListener('keydown', keyHandler);
     };
   }, []);
 
@@ -66,7 +68,14 @@ function Layout({ open, onClose, children }: LayoutProps) {
         unmountOnExit
         classNames={overlayAnimation}
       >
-        <div ref={overlayRef} className={styles.overlay} onClick={onClose} />
+        <div
+          ref={overlayRef}
+          className={styles.overlay}
+          onClick={onClose}
+          role="button"
+          aria-label="Закрыть окно"
+          tabIndex={-1}
+        />
       </CSSTransition>
       <CSSTransition
         in={animationIn}
@@ -78,6 +87,7 @@ function Layout({ open, onClose, children }: LayoutProps) {
       >
         <div ref={contentRef} className={styles.content}>
           <button
+            type="button"
             onClick={onClose}
             className={styles.button}
             aria-label="Закрыть окно"

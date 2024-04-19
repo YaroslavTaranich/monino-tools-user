@@ -1,7 +1,7 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./benefits.module.scss";
-import Link from "next/link";
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
+import styles from './benefits.module.scss';
 
 interface BenefitsCardProp {
   title: string;
@@ -10,7 +10,9 @@ interface BenefitsCardProp {
   link: null | string;
 }
 
-function BenefitsCard({ title, text, icon, link }: BenefitsCardProp) {
+function BenefitsCard({
+  title, text, icon, link,
+}: BenefitsCardProp) {
   return (
     <li className={styles.card}>
       <FontAwesomeIcon icon={icon} className={styles.card__icon} />

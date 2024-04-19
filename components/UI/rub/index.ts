@@ -1,3 +1,3 @@
-import Rub from "./rub";
+import Rub from './rub';
 
 export { Rub };

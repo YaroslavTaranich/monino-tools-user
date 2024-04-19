@@ -1,7 +1,7 @@
-import { ICategory, getAllCategories, getAllTools } from "@/services/api";
-import { MetadataRoute } from "next";
+import { MetadataRoute } from 'next';
+import { ICategory, getAllCategories, getAllTools } from '@/services/api';
 
-const HOST = process.env.HOST || "";
+const HOST = process.env.HOST || '';
 
 interface ICategoryById {
   [id: string]: ICategory;
@@ -9,25 +9,23 @@ interface ICategoryById {
 
 export default async function sitemap() {
   const categories = await getAllCategories();
-  const categoriesById = categories.reduce((acc: ICategoryById, current) => {
-    return {
-      ...acc,
-      [current.id]: current,
-    } as ICategoryById;
-  }, {});
+  const categoriesById = categories.reduce((acc: ICategoryById, current) => ({
+    ...acc,
+    [current.id]: current,
+  } as ICategoryById), {});
   const tools = await getAllTools();
 
   const map: MetadataRoute.Sitemap = [
     {
       url: HOST,
       lastModified: new Date(),
-      changeFrequency: "yearly",
+      changeFrequency: 'yearly',
       priority: 1,
     },
     {
-      url: HOST + "delivery",
+      url: `${HOST}delivery`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.7,
     },
   ];
@@ -36,7 +34,7 @@ export default async function sitemap() {
     map.push({
       url: HOST + category.name,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.9,
     });
   });
@@ -45,9 +43,9 @@ export default async function sitemap() {
     if (tool.categoryId in categoriesById) {
       const categoryName = categoriesById[tool.categoryId].name;
       map.push({
-        url: HOST + categoryName + "/" + tool.name,
+        url: `${HOST + categoryName}/${tool.name}`,
         lastModified: new Date(),
-        changeFrequency: "monthly",
+        changeFrequency: 'monthly',
         priority: 0.85,
       });
     }

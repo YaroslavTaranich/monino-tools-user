@@ -1,9 +1,9 @@
-import { ITool } from "@/services/api";
-import { Rub } from "../UI";
-import { Specification } from "../specification";
-import styles from "./tools-list.module.scss";
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { ITool } from '@/services/api';
+import { Rub } from '../UI';
+import { Specification } from '../specification';
+import styles from './tools-list.module.scss';
 
 interface ToolsListItemProps {
   tool: ITool;
@@ -16,7 +16,7 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
       <Image
         width={400}
         height={400}
-        src={process.env.API_URL + "file/" + tool.image}
+        src={`${process.env.API_URL}file/${tool.image}`}
         alt={tool.name}
         className={styles.pic}
       />
@@ -24,7 +24,10 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
         <h2 className={styles.title}>{tool.label}</h2>
         <Specification data={tool.specification} />
         <div className={styles.price}>
-          <span className={styles.price__span}>от {tool.price} </span>
+          <span className={styles.price__span}>
+            от
+            {tool.price}
+          </span>
           <Rub />
           <span className={styles.price__span}> / сутки</span>
         </div>

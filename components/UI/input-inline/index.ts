@@ -1,3 +1,3 @@
-import InputInline from "./input-inline";
+import InputInline from './input-inline';
 
 export { InputInline };

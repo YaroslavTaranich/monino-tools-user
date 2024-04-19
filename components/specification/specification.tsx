@@ -1,18 +1,16 @@
-import styles from "./specification.module.scss";
+import styles from './specification.module.scss';
 
 interface SpecificationProps {
   data: string;
 }
 
-const createSpec = (string: string) => {
-  return string.split("\n").map((line) => {
-    const splitted = line.split(":");
-    return {
-      name: splitted[0]?.trim(),
-      value: splitted[1]?.trim(),
-    };
-  });
-};
+const createSpec = (string: string) => string.split('\n').map((line) => {
+  const splitted = line.split(':');
+  return {
+    name: splitted[0]?.trim(),
+    value: splitted[1]?.trim(),
+  };
+});
 
 function Specification({ data }: SpecificationProps) {
   const spec = createSpec(data);

@@ -1,6 +1,6 @@
-import { forwardRef, HTMLAttributes } from "react";
+import { forwardRef, HTMLAttributes } from 'react';
 
-import styles from "./input-fancy-label.module.scss";
+import styles from './input-fancy-label.module.scss';
 
 interface TextareaFancyLabelProps extends HTMLAttributes<HTMLTextAreaElement> {
   name: string;
@@ -11,29 +11,32 @@ interface TextareaFancyLabelProps extends HTMLAttributes<HTMLTextAreaElement> {
 }
 
 const TextareaFancyLabel = forwardRef<
-  HTMLTextAreaElement,
-  TextareaFancyLabelProps
->(({ name, label, className, error, rows = 3, ...props }, ref) => {
+HTMLTextAreaElement,
+TextareaFancyLabelProps
+>(({
+  name, label, className, error, rows = 3, ...props
+}, ref) => {
   const textareaClassName = [styles.input, className];
 
   return (
     <div className={styles.wrapper}>
       <textarea
         id={name}
-        className={textareaClassName.join(" ")}
+        className={textareaClassName.join(' ')}
         placeholder={label}
         ref={ref}
         rows={rows}
         {...props}
       />
       <label htmlFor={name} className={styles.label}>
-        {label}:
+        {label}
+        :
       </label>
       {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 });
 
-TextareaFancyLabel.displayName = "TextareaFancyLabel";
+TextareaFancyLabel.displayName = 'TextareaFancyLabel';
 
 export default TextareaFancyLabel;

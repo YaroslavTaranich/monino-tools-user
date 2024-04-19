@@ -1,3 +1,3 @@
-import RadioInput from "./radio-input";
+import RadioInput from './radio-input';
 
 export { RadioInput };

@@ -1,6 +1,6 @@
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
-import Message from "./message";
+import Message from './message';
 
 interface ErrorMessageProps {
   closePopup?: () => void;

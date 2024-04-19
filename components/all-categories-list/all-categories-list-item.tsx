@@ -1,7 +1,7 @@
-import styles from "./all-categories-list.module.scss";
-import { ICategory } from "@/services/api";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './all-categories-list.module.scss';
+import { ICategory } from '@/services/api';
 
 interface AllCategoriesListItemProps {
   category: ICategory;
@@ -14,7 +14,7 @@ function AllCategoriesListItem({ category }: AllCategoriesListItemProps) {
         <Image
           width={600}
           height={600}
-          src={process.env.API_URL + "file/" + category.image}
+          src={`${process.env.API_URL}file/${category.image}`}
           alt={category.label}
           className={styles.img}
         />

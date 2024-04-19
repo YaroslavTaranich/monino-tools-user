@@ -1,5 +1,5 @@
-import { Title } from "../UI";
-import styles from "./delivery-section.module.scss";
+import { Title } from '../UI';
+import styles from './delivery-section.module.scss';
 
 function DeliverySection() {
   return (

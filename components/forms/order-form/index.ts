@@ -1,3 +1,3 @@
-import OrderForm from "./order-form";
+import OrderForm from './order-form';
 
 export { OrderForm };

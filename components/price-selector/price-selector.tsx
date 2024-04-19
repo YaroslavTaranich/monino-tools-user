@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { calculatePrice, calculateZalog } from "../../utils/calculate-price";
-import { Rub } from "../UI";
-import styles from "./price-selector.module.scss";
-import PriceSelectorButton from "./price-selector-button";
+import { useState } from 'react';
+import { calculatePrice, calculateZalog } from '../../utils/calculate-price';
+import { Rub } from '../UI';
+import styles from './price-selector.module.scss';
+import PriceSelectorButton from './price-selector-button';
 
 const buttons = [1, 3, 7, 21];
 
@@ -35,13 +35,19 @@ function PriceSelector({ price, zalog }: PriceSelectorProps) {
         </div>
       </div>
       <div className={styles.price}>
-        <span className={styles.price__item}>{currentPrice} </span>
+        <span className={styles.price__item}>
+          {currentPrice}
+          {' '}
+        </span>
         <Rub />
         <span className={styles.price__item}> / День</span>
       </div>
       <div className={styles.zalog}>
         <span className={styles.zalog__item}>
-          Залог: {calculateZalog(zalog, price, selected)}{" "}
+          Залог:
+          {' '}
+          {calculateZalog(zalog, price, selected)}
+          {' '}
         </span>
         <Rub />
       </div>

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { ReactElement } from "react";
-import { useMount } from "../../../hooks/use-mount";
-import Portal from "./portal";
-import Layout from "./layout";
-import { ANIMATION_TIME } from "./const";
+import { ReactElement } from 'react';
+import { useMount } from '../../../hooks/use-mount';
+import Portal from './portal';
+import Layout from './layout';
+import { ANIMATION_TIME } from './const';
 
 interface PopupProps {
   open: boolean;

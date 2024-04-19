@@ -1,3 +1,3 @@
-import FormLoader from "./form-loader";
+import FormLoader from './form-loader';
 
 export { FormLoader };

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./not-found-page.module.scss";
-import { Button } from "../UI";
-import NotFoundIcon from "@/assets/not-found.svg";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './not-found-page.module.scss';
+import { Button } from '../UI';
+import NotFoundIcon from '@/assets/not-found.svg';
 
 interface INotFoundProps {
   title?: string;
@@ -12,7 +12,7 @@ interface INotFoundProps {
 }
 
 const defaultText = {
-  title: "Запрашиваемой страницы не существует!",
+  title: 'Запрашиваемой страницы не существует!',
 };
 
 const NotFound: React.FC<INotFoundProps> = ({
@@ -31,7 +31,7 @@ const NotFound: React.FC<INotFoundProps> = ({
       )}
 
       <div className={styles.notFound__buttons}>
-        <Button onClick={() => router.push("/")}>На главную</Button>
+        <Button onClick={() => router.push('/')}>На главную</Button>
       </div>
     </main>
   );

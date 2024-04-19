@@ -1,6 +1,6 @@
-import { ITool } from "@/services/api";
-import ToolInList from "./tools-list-item";
-import styles from "./tools-list.module.scss";
+import { ITool } from '@/services/api';
+import ToolInList from './tools-list-item';
+import styles from './tools-list.module.scss';
 
 interface ToolsListProps {
   tools: ITool[];
@@ -15,7 +15,7 @@ function ToolsList({ tools, categoryName }: ToolsListProps) {
           <li className={styles.tools__item} key={tool.id}>
             <ToolInList
               tool={tool}
-              url={"/" + categoryName + "/" + tool.name}
+              url={`/${categoryName}/${tool.name}`}
             />
           </li>
         ))}

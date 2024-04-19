@@ -1,6 +1,6 @@
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
-import Message from "./message";
+import Message from './message';
 
 interface SuccessMessageProps {
   closePopup?: () => void;

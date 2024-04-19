@@ -1,3 +1,3 @@
-import { Metrika } from "./metrica";
+import { Metrika } from './metrica';
 
 export { Metrika };

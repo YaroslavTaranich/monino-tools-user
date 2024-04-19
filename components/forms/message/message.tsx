@@ -1,20 +1,20 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Button from "../../UI/button/button";
+import Button from '../../UI/button/button';
 
-import styles from "./message.module.scss";
+import styles from './message.module.scss';
 
 interface MessageProps {
   title?: string;
   text?: string;
   icon: IconDefinition;
   closePopup?: () => void;
-  type: "success" | "error";
+  type: 'success' | 'error';
 }
 
 function Message({
-  title = "Ошибка!",
+  title = 'Ошибка!',
   text,
   icon,
   closePopup,
@@ -23,7 +23,7 @@ function Message({
   const classNames = [styles.message, styles[type]];
 
   return (
-    <div className={classNames.join(" ")}>
+    <div className={classNames.join(' ')}>
       <h2 className={styles.title}>{title}</h2>
       <FontAwesomeIcon className={styles.icon} icon={icon} />
       {text && <p className={styles.text}>{text}</p>}
