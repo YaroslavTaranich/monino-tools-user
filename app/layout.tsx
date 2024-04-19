@@ -4,6 +4,8 @@ import "normalize.css";
 import "./globals.css";
 import { Header } from "@/components/header";
 import styles from "./page.module.css";
+import { Suspense } from "react";
+import { Metrika } from "@/components/metrika";
 
 const inter = Roboto({
   weight: ["300", "400", "700"],
@@ -26,6 +28,9 @@ export default function RootLayout({
       <body className={inter.className + " " + styles.body}>
         <Header />
         <main>{children}</main>
+        <Suspense>
+          <Metrika />
+        </Suspense>
       </body>
     </html>
   );
