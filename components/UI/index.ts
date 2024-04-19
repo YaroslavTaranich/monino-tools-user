@@ -4,7 +4,6 @@ import { InputInline } from "./input-inline";
 import { Popup } from "./popup";
 import { RadioInput } from "./radio-input";
 import { Rub } from "./rub";
-import { Spinner } from "./spinner";
 import { Tabs } from "./tabs";
 import { Title } from "./title";
 
@@ -16,7 +15,6 @@ export {
   Popup,
   RadioInput,
   Rub,
-  Spinner,
   Tabs,
   Title,
 };

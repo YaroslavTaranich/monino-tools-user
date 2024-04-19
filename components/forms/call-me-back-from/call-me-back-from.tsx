@@ -35,7 +35,7 @@ function CallMeBackFrom() {
     setFetchStatus("loading");
     const message = generateTelegramMessage(data);
     fetch("/api/message", { method: "POST", body: JSON.stringify({ message }) })
-      .then(() => setFetchStatus("success"))
+      .then((res) => setFetchStatus(res.ok ? "success" : "error"))
       .catch(() => setFetchStatus("error"));
   };
 

@@ -104,7 +104,7 @@ function OrderForm({ tool }: IOrderFormProps) {
     );
     setFetchStatus("loading");
     fetch("/api/message", { method: "POST", body: JSON.stringify({ message }) })
-      .then(() => setFetchStatus("success"))
+      .then((res) => setFetchStatus(res.ok ? "success" : "error"))
       .catch(() => setFetchStatus("error"));
   };
 
