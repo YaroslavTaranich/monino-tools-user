@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, InputFancyLabel } from "../../UI";
-import sendMessage from "@/services/telegram/";
 import { FormLoader } from "../form-loader";
 import { ErrorMessage, SuccessMessage } from "../message";
 import { generateTelegramMessage } from "@/utils/generate-telegram-message";
@@ -34,7 +33,8 @@ function CallMeBackFrom() {
 
   const onSubmit = (data: IFormInputs) => {
     setFetchStatus("loading");
-    sendMessage(generateTelegramMessage(data))
+    const message = generateTelegramMessage(data);
+    fetch("/api/message", { method: "POST", body: JSON.stringify({ message }) })
       .then(() => setFetchStatus("success"))
       .catch(() => setFetchStatus("error"));
   };

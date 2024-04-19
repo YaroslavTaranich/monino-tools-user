@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
 import { calculatePrice, calculateZalog } from "@/utils/calculate-price";
 import { generateTelegramMessage } from "@/utils/generate-telegram-message";
-import sendMessage from "@/services/telegram";
 import { FormLoader } from "../form-loader";
 import { SuccessMessage, ErrorMessage } from "../message";
 import { schema } from "./schema";
@@ -104,7 +103,7 @@ function OrderForm({ tool }: IOrderFormProps) {
       getMessageValues(data, tool.label, tool.price, tool.zalog)
     );
     setFetchStatus("loading");
-    sendMessage(message)
+    fetch("/api/message", { method: "POST", body: JSON.stringify({ message }) })
       .then(() => setFetchStatus("success"))
       .catch(() => setFetchStatus("error"));
   };
