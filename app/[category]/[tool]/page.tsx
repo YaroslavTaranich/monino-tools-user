@@ -8,13 +8,17 @@ import { Specification } from '@/components/specification';
 import { getAllCategories, getAllTools } from '@/services/api';
 
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  const tools = await getAllTools();
+  try {
+    const categories = await getAllCategories();
+    const tools = await getAllTools();
 
-  return tools.map((tool) => ({
-    tool: tool.name,
-    category: categories.find((cat) => cat.id === tool.categoryId)?.name,
-  }));
+    return tools.map((tool) => ({
+      tool: tool.name,
+      category: categories.find((cat) => cat.id === tool.categoryId)?.name,
+    }));
+  } catch (e) {
+    return {};
+  }
 }
 
 export const dynamicParams = false;
@@ -30,22 +34,29 @@ export async function generateMetadata({
   const toolName = params.tool;
 
   // fetch data
-  const tools = await getAllTools();
+  try {
+    const tools = await getAllTools();
 
-  const current = tools.find((c) => c.name === toolName);
-  return {
-    title: current?.html_title,
-    description: current?.html_description,
-    openGraph: {
-      images: [`${process.env.API_URL}file/${current?.image}`],
+    const current = tools.find((c) => c.name === toolName);
+    return {
       title: current?.html_title,
       description: current?.html_description,
-    },
-  };
+      openGraph: {
+        images: [`${process.env.API_URL}file/${current?.image}`],
+        title: current?.html_title,
+        description: current?.html_description,
+      },
+    };
+  } catch (e) {
+    console.error('Error while fitching', e);
+    return {};
+  }
 }
 
 async function Page({ params }: IPageProps) {
-  const tool = (await getAllTools()).find((currentTool) => currentTool.name === params.tool);
+  const tool = (await getAllTools()).find(
+    (currentTool) => currentTool.name === params.tool
+  );
 
   if (!tool) return null;
   const tabs = [
