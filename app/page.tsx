@@ -5,13 +5,17 @@ import { AllCategoriesList } from '@/components/all-categories-list';
 import { DeliverySection } from '@/components/delivery-section';
 
 export default async function Home() {
-  const categories = await getAllCategories();
-  return (
-    <div>
-      <Title>Строительный инструмент в аренду</Title>
-      <AllCategoriesList categories={categories} />
-      <Benefits />
-      <DeliverySection />
-    </div>
-  );
+  try {
+    const categories = await getAllCategories();
+    return (
+      <div>
+        <Title>Строительный инструмент в аренду</Title>
+        <AllCategoriesList categories={categories} />
+        <Benefits />
+        <DeliverySection />
+      </div>
+    );
+  } catch (e) {
+    return <div>Ошибка</div>;
+  }
 }
