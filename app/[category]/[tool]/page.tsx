@@ -49,7 +49,6 @@ export async function generateMetadata({
       },
     };
   } catch (e) {
-    console.error('Error while fitching', e);
     return {};
   }
 }
