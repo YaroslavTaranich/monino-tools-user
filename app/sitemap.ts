@@ -7,12 +7,18 @@ interface ICategoryById {
   [id: string]: ICategory;
 }
 
+export const dynamic = 'force-dynamic'; // Важно!
+export const revalidate = 8400;
+
 export default async function sitemap() {
   const categories = await getAllCategories();
-  const categoriesById = categories.reduce((acc: ICategoryById, current) => ({
-    ...acc,
-    [current.id]: current,
-  } as ICategoryById), {});
+  const categoriesById = categories.reduce(
+    (acc: ICategoryById, current) => ({
+      ...acc,
+      [current.id]: current,
+    } as ICategoryById),
+    {},
+  );
   const tools = await getAllTools();
 
   const map: MetadataRoute.Sitemap = [

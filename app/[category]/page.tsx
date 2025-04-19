@@ -15,8 +15,8 @@ export async function generateStaticParams() {
   }
 }
 
-export const revalidate = 3600;
-export const dynamicParams = false;
+export const revalidate = 360;
+export const dynamic = 'force-dynamic'; // Важно!
 
 interface IPageProps {
   params: { category: string };

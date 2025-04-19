@@ -31,8 +31,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "api.moninotools.ru",
-        port: "",
+        hostname: "api",
+        port: "80",
         pathname: "/**",
       },
     ],
