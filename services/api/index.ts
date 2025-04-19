@@ -1,4 +1,4 @@
-const makeUrl = (url: string[]) => process.env.API_URL + url.join('/');
+const makeUrl = (url: string[]) => (process.env.NODE_ENV === 'production' ? 'http://api/proxy' : process.env.API_URL + url.join('/'));
 
 export interface ICategory {
   id: number;

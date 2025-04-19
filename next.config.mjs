@@ -30,8 +30,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "api",
+        protocol: "https",
+        hostname: "api.moninotools.ru",
         port: "80",
         pathname: "/**",
       },
