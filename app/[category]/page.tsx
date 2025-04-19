@@ -11,10 +11,11 @@ export async function generateStaticParams() {
       category: category.name,
     }));
   } catch (e) {
-    return {};
+    return [];
   }
 }
 
+export const revalidate = 3600;
 export const dynamicParams = false;
 
 interface IPageProps {
@@ -48,10 +49,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: IPageProps) {
   const category = (await getAllCategories()).find(
-    (cat) => cat.name === params.category
+    (cat) => cat.name === params.category,
   );
   const tools = (await getAllTools()).filter(
-    (tool) => tool.categoryId === category?.id
+    (tool) => tool.categoryId === category?.id,
   );
 
   if (!category) return null;

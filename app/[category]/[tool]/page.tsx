@@ -17,9 +17,11 @@ export async function generateStaticParams() {
       category: categories.find((cat) => cat.id === tool.categoryId)?.name,
     }));
   } catch (e) {
-    return {};
+    return [];
   }
 }
+
+export const revalidate = 3600;
 
 export const dynamicParams = false;
 
@@ -55,7 +57,7 @@ export async function generateMetadata({
 
 async function Page({ params }: IPageProps) {
   const tool = (await getAllTools()).find(
-    (currentTool) => currentTool.name === params.tool
+    (currentTool) => currentTool.name === params.tool,
   );
 
   if (!tool) return null;
