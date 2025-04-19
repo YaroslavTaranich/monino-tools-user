@@ -55,28 +55,32 @@ export async function generateMetadata({
 }
 
 async function Page({ params }: IPageProps) {
-  const tool = (await getAllTools()).find(
-    (currentTool) => currentTool.name === params.tool,
-  );
+  try {
+    const tool = (await getAllTools()).find(
+      (currentTool) => currentTool.name === params.tool,
+    );
 
-  if (!tool) return null;
-  const tabs = [
-    {
-      label: 'Характеристики',
-      content: <Specification data={tool.specification} />,
-      icon: faGear,
-    },
-    { label: 'Описание', content: tool.description, icon: faMessage },
-  ];
+    if (!tool) return null;
+    const tabs = [
+      {
+        label: 'Характеристики',
+        content: <Specification data={tool.specification} />,
+        icon: faGear,
+      },
+      { label: 'Описание', content: tool.description, icon: faMessage },
+    ];
 
-  return (
-    <>
-      <Title>{tool.title}</Title>
-      <ToolOrder tool={tool} />
-      <Tabs tabs={tabs} />
-      <Benefits />
-    </>
-  );
+    return (
+      <>
+        <Title>{tool.title}</Title>
+        <ToolOrder tool={tool} />
+        <Tabs tabs={tabs} />
+        <Benefits />
+      </>
+    );
+  } catch (error) {
+    return null;
+  }
 }
 
 export default Page;

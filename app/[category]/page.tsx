@@ -48,19 +48,23 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: IPageProps) {
-  const category = (await getAllCategories()).find(
-    (cat) => cat.name === params.category,
-  );
-  const tools = (await getAllTools()).filter(
-    (tool) => tool.categoryId === category?.id,
-  );
+  try {
+    const category = (await getAllCategories()).find(
+      (cat) => cat.name === params.category,
+    );
+    const tools = (await getAllTools()).filter(
+      (tool) => tool.categoryId === category?.id,
+    );
 
-  if (!category) return null;
+    if (!category) return null;
 
-  return (
-    <div>
-      <Title>{category.title}</Title>
-      <ToolsList tools={tools} categoryName={category.name || ''} />
-    </div>
-  );
+    return (
+      <div>
+        <Title>{category.title}</Title>
+        <ToolsList tools={tools} categoryName={category.name || ''} />
+      </div>
+    );
+  } catch (e) {
+    return null;
+  }
 }
