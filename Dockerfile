@@ -6,5 +6,5 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-EXPOSE 4000
-CMD ["npm", "run", "start"]
+EXPOSE 3000
+CMD ["npm", "start:docker"]
