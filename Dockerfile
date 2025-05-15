@@ -7,4 +7,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 3000
-CMD ["npm", "start:docker"]
+CMD ["npm", "run", "start:docker"]
