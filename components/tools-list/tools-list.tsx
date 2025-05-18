@@ -8,15 +8,14 @@ interface ToolsListProps {
 }
 
 function ToolsList({ tools, categoryName }: ToolsListProps) {
+  console.log(tools);
+
   return (
     <section className={styles.tools}>
       <ul className={styles.tools__list}>
         {tools.map((tool) => (
           <li className={styles.tools__item} key={tool.id}>
-            <ToolInList
-              tool={tool}
-              url={`/${categoryName}/${tool.name}`}
-            />
+            <ToolInList tool={tool} url={`/${categoryName}/${tool.name}`} />
           </li>
         ))}
       </ul>

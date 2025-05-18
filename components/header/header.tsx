@@ -11,7 +11,7 @@ function Header() {
         <Link href="/" className={styles.header__logo}>
           <LogoMain />
           <div className={styles.header__logoText}>
-            Хороший прокат инструмента
+            Хороший инструмент в аренду
           </div>
         </Link>
         <div className={styles.header__phone}>

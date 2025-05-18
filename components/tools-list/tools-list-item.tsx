@@ -16,7 +16,7 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
       <Image
         width={400}
         height={400}
-        src={`${process.env.API_URL}file/${tool.image}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}file/${tool.image}`}
         alt={tool.name}
         className={styles.pic}
       />

@@ -37,7 +37,7 @@ export async function generateMetadata({
       title: current?.html_title,
       description: current?.html_description,
       openGraph: {
-        images: [`${process.env.API_URL}file/${current?.image}`],
+        images: [`${process.env.NEXT_PUBLIC_API_URL}file/${current?.image}`],
         title: current?.html_title,
         description: current?.html_description,
       },
