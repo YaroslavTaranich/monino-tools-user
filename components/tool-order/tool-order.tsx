@@ -24,7 +24,7 @@ function ToolOrder({ tool }: ToolOrderProps) {
         <Image
           height={600}
           width={600}
-          src={`${process.env.NEXT_PUBLIC_API_URL}file/${tool.image}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}file/${tool.image}`}
           alt={tool.label}
         />
       </div>
