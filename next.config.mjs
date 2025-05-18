@@ -28,11 +28,11 @@ const nextConfig = {
     return config;
   },
   images: {
+    domains: ["api.moninotools.ru", "moninotools.ru", "localhost"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "api.moninotools.ru",
-        port: "80",
         pathname: "/**",
       },
     ],
