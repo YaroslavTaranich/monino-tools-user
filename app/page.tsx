@@ -4,22 +4,13 @@ import { Benefits } from '@/components/benefits';
 import { AllCategoriesList } from '@/components/all-categories-list';
 import { DeliverySection } from '@/components/delivery-section';
 
-export async function generateStaticParams() {
-  try {
-    const categories = await getAllCategories();
-
-    return categories;
-  } catch (e) {
-    return [];
-  }
-}
-
 export const revalidate = 360;
-export const dynamic = 'force-dynamic'; // Важно!
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   try {
     const categories = await getAllCategories();
+
     return (
       <div>
         <Title>Строительный инструмент в аренду</Title>
@@ -29,6 +20,7 @@ export default async function Home() {
       </div>
     );
   } catch (e) {
-    return <div>Ошибка</div>;
+    console.error(e); // полезно для продакшена
+    return <div>Ошибка загрузки данных</div>;
   }
 }
