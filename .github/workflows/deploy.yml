@@ -24,6 +24,6 @@ jobs:
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
-          cd /monino-tools-nginx
+          cd monino-tools-nginx/
           sh update-submodules.sh
           sh rebuild-user.sh
