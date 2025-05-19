@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { getAllCategories, getAllTools } from '@/services/api';
 import { Title } from '@/components/UI';
 import { ToolsList } from '@/components/tools-list';
@@ -59,7 +60,9 @@ export default async function Page({ params }: IPageProps) {
       (tool) => tool.categoryId === category?.id,
     );
 
-    if (!category) return null;
+    if (!category || !tools) {
+      redirect('/');
+    }
 
     return (
       <div>
@@ -68,6 +71,6 @@ export default async function Page({ params }: IPageProps) {
       </div>
     );
   } catch (e) {
-    return null;
+    return redirect('/');
   }
 }

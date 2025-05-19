@@ -1,6 +1,7 @@
 import React from 'react';
 import { faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
 import { Title, Tabs } from '@/components/UI';
@@ -62,7 +63,10 @@ async function Page({ params }: IPageProps) {
       (currentTool) => currentTool.name === params.tool,
     );
 
-    if (!tool) return null;
+    if (!tool) {
+      return redirect('/');
+    }
+
     const tabs = [
       {
         label: 'Характеристики',
@@ -82,7 +86,7 @@ async function Page({ params }: IPageProps) {
     );
   } catch (error) {
     console.log(error);
-    return <div>Ошибка</div>;
+    redirect('/');
   }
 }
 
