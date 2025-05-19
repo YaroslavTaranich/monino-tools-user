@@ -1,8 +1,10 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const makeUrl = (url: string[]) => (
   // process.env.NODE_ENV === 'production'
   // ? 'http://api/proxy'
   // :
-  process.env.NEXT_PUBLIC_API_URL + url.join('/')
+  API_URL + url.join('/')
 );
 
 export interface ICategory {
@@ -45,7 +47,12 @@ export const getAllCategories = async () => {
     throw new Error('Не удалось загрузить категории');
   }
 
-  return (await res.json()) as ICategory[];
+  const categories = await res.json() as ICategory[];
+
+  return categories.map((cat) => ({
+    ...cat,
+    image: `${API_URL}file/${cat.image}`,
+  }));
 };
 
 export const getAllTools = async () => {
@@ -55,5 +62,10 @@ export const getAllTools = async () => {
     throw new Error('Не удалось загрузить инструменты');
   }
 
-  return (await res.json()) as ITool[];
+  const tools = (await res.json()) as ITool[];
+
+  return tools.map((tool) => ({
+    ...tool,
+    image: `${API_URL}file/${tool.image}`,
+  }));
 };

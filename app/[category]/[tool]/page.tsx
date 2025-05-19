@@ -39,11 +39,14 @@ export async function generateMetadata({
     const tools = await getAllTools();
 
     const current = tools.find((c) => c.name === toolName);
+
+    if (!current) return {};
+
     return {
       title: current?.html_title,
       description: current?.html_description,
       openGraph: {
-        images: [`${process.env.NEXT_PUBLIC_API_URL}file/${current?.image}`],
+        images: [current.image],
         title: current?.html_title,
         description: current?.html_description,
       },
@@ -78,7 +81,8 @@ async function Page({ params }: IPageProps) {
       </>
     );
   } catch (error) {
-    return null;
+    console.log(error);
+    return <div>Ошибка</div>;
   }
 }
 

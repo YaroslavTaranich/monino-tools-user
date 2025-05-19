@@ -14,7 +14,7 @@ function AllCategoriesListItem({ category }: AllCategoriesListItemProps) {
         <Image
           width={600}
           height={600}
-          src={`${process.env.NEXT_PUBLIC_API_URL}file/${category.image}`}
+          src={category.image}
           alt={category.label}
           className={styles.img}
         />

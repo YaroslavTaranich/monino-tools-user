@@ -33,11 +33,14 @@ export async function generateMetadata({
     const categories = await getAllCategories();
 
     const current = categories.find((c) => c.name === categoryName);
+
+    if (!current) return {};
+
     return {
       title: current?.html_title,
       description: current?.html_description,
       openGraph: {
-        images: [`${process.env.NEXT_PUBLIC_API_URL}file/${current?.image}`],
+        images: [current.image],
         title: current?.html_title,
         description: current?.html_description,
       },
