@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
 import { Title, Tabs } from '@/components/UI';
-import { Specification } from '@/components/specification';
+import { Description, Specification } from '@/components/specification';
 import { getAllCategories, getAllTools } from '@/services/api';
 
 export async function generateStaticParams() {
@@ -73,7 +73,11 @@ async function Page({ params }: IPageProps) {
         content: <Specification data={tool.specification} />,
         icon: faGear,
       },
-      { label: 'Описание', content: tool.description, icon: faMessage },
+      {
+        label: 'Описание',
+        content: <Description text={tool.description} />,
+        icon: faMessage,
+      },
     ];
 
     return (
