@@ -52,25 +52,25 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: IPageProps) {
-  try {
-    const category = (await getAllCategories()).find(
-      (cat) => cat.name === params.category,
-    );
-    const tools = (await getAllTools()).filter(
-      (tool) => tool.categoryId === category?.id,
-    );
+  const category = (await getAllCategories())?.find(
+    (cat) => cat.name === params.category,
+  );
+  const tools = (await getAllTools())?.filter(
+    (tool) => tool.categoryId === category?.id,
+  );
 
-    if (!category || !tools) {
-      redirect('/');
-    }
-
-    return (
-      <div>
-        <Title>{category.title}</Title>
-        <ToolsList tools={tools} categoryName={category.name || ''} />
-      </div>
-    );
-  } catch (e) {
-    return redirect('/');
+  if (!category || !tools) {
+    redirect('/');
   }
+
+  if (tools.length === 1) {
+    redirect(`/${category.name}/${tools[0]?.name}/`);
+  }
+
+  return (
+    <div>
+      <Title>{category.title}</Title>
+      <ToolsList tools={tools} categoryName={category.name || ''} />
+    </div>
+  );
 }
