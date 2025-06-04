@@ -128,6 +128,7 @@ function OrderForm({ tool }: IOrderFormProps) {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h3 className={styles.form__title}>
         Взять в аренду
+        {' '}
         {tool.label}
       </h3>
       <Controller

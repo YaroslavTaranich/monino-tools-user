@@ -26,6 +26,7 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
         <div className={styles.price}>
           <span className={styles.price__span}>
             от
+            {' '}
             {tool.price}
           </span>
           <Rub />
