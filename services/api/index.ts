@@ -7,7 +7,12 @@ const makeUrl = (url: string[]) => (
   API_URL + url.join('/')
 );
 
-export interface ICategory {
+interface IDates {
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ICategory extends IDates {
   id: number;
   name: string;
   label: string;
@@ -23,7 +28,7 @@ export interface ICategoryName {
   label: string;
 }
 
-export interface ITool {
+export interface ITool extends IDates {
   id: number;
   name: string;
   label: string;

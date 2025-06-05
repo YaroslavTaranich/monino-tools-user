@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { ICategory, getAllCategories, getAllTools } from '@/services/api';
 
-const HOST = process.env.HOST || '';
+const HOST = process.env.HOST || 'https://moninotools.ru/';
 
 interface ICategoryById {
   [id: string]: ICategory;
@@ -21,27 +21,27 @@ export default async function sitemap() {
   );
   const tools = await getAllTools();
 
+  const mainPageDate = new Date(
+    Math.min(
+      ...categories.map(({ updatedAt }) => new Date(updatedAt).getTime()),
+    ),
+  );
+
   const map: MetadataRoute.Sitemap = [
     {
       url: HOST,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
+      lastModified: mainPageDate,
     },
     {
       url: `${HOST}delivery`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ];
 
   categories.forEach((category) => {
     map.push({
       url: HOST + category.name,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
+      lastModified: new Date(category.updatedAt),
     });
   });
 
@@ -50,9 +50,7 @@ export default async function sitemap() {
       const categoryName = categoriesById[tool.categoryId].name;
       map.push({
         url: `${HOST + categoryName}/${tool.name}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.85,
+        lastModified: new Date(tool.updatedAt),
       });
     }
   });
