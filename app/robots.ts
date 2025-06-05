@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
-
-const HOST = process.env.HOST || '';
+import { HOST } from '@/constants';
 
 export default function robots(): MetadataRoute.Robots {
   return {

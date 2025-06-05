@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 import { ICategory, getAllCategories, getAllTools } from '@/services/api';
-
-const HOST = process.env.HOST || 'https://moninotools.ru/';
+import { HOST } from '@/constants';
 
 interface ICategoryById {
   [id: string]: ICategory;
