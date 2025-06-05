@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import { Header } from '@/components/header';
 import styles from './page.module.css';
 import { Metrika } from '@/components/metrika';
+import { HOST } from '@/constants';
 
 const inter = Roboto({
   weight: ['300', '400', '700'],
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href={`${HOST}/favicon.ico`} type="image/x-icon" />
       </head>
       <body className={`${inter.className} ${styles.body}`}>
         <Header />
