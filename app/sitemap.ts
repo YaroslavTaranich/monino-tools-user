@@ -35,6 +35,10 @@ export default async function sitemap() {
       url: `${HOST}delivery`,
       lastModified: new Date(),
     },
+    {
+      url: `${HOST}otkachka-vody`,
+      lastModified: new Date(),
+    },
   ];
 
   categories.forEach((category) => {

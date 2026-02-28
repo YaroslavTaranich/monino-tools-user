@@ -4,7 +4,7 @@ import styles from './title.module.scss';
 
 interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
   children: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'tertiary';
   number?: 1 | 2 | 3 | 4;
 }
 
