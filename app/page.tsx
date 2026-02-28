@@ -3,6 +3,7 @@ import { Title } from '@/components/UI';
 import { Benefits } from '@/components/benefits';
 import { AllCategoriesList } from '@/components/all-categories-list';
 import { DeliverySection } from '@/components/delivery-section';
+import OtkachKaVodySection from '@/components/otkachka-vody-section/otkachka-vody-section';
 
 export const revalidate = 360;
 export const dynamic = 'force-dynamic';
@@ -17,6 +18,7 @@ export default async function Home() {
         <AllCategoriesList categories={categories} />
         <Benefits />
         <DeliverySection />
+        <OtkachKaVodySection />
       </div>
     );
   } catch (e) {
