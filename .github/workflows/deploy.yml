@@ -7,23 +7,35 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
+
+    - name: Use Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: "20.x"
+        cache: npm
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     - name: Build project
       run: npm run build
 
-    - name: SSH and deploy (with password)
-      uses: appleboy/ssh-action@master
+    - name: Deploy user frontend
+      uses: appleboy/ssh-action@v1.2.5
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
+          set -e
           cd monino-tools-nginx/
-          sh update-submodules.sh
-          sh rebuild-user.sh
+          git -C user fetch origin master
+          git -C user checkout --detach origin/master
+          docker compose up -d --build --no-deps user
+          docker image prune --force
+          docker builder prune --force --filter "until=168h"
