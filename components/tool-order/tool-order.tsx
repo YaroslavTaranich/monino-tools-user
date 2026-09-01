@@ -1,9 +1,5 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
-import OrderForm from '../forms/order-form/order-form';
-import { Button, Popup } from '../UI';
+import buttonStyles from '../UI/button/button.module.scss';
 import styles from './tool-order.module.scss';
 import { ITool } from '@/services/api';
 import PriceSelector from '../price-selector/price-selector';
@@ -13,12 +9,16 @@ interface ToolOrderProps {
 }
 
 function ToolOrder({ tool }: ToolOrderProps) {
-  const [showPopup, setShowPopup] = useState(false);
   return (
     <section className={styles.order}>
       <div className={styles.order__item}>
         <PriceSelector price={tool.price} zalog={tool.zalog} />
-        <Button onClick={() => setShowPopup(true)}>Взять в аренду</Button>
+        <a
+          className={`${buttonStyles.button} ${buttonStyles.primary} ${styles.phone}`}
+          href="tel:+79166773956"
+        >
+          +7 916 677-39-56
+        </a>
       </div>
       <div className={styles.order__item}>
         <Image
@@ -28,9 +28,6 @@ function ToolOrder({ tool }: ToolOrderProps) {
           alt={tool.label}
         />
       </div>
-      <Popup open={showPopup} onClose={() => setShowPopup(false)}>
-        <OrderForm tool={tool} />
-      </Popup>
     </section>
   );
 }
