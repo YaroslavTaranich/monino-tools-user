@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Check out the pinned release
         if: inputs.operation != 'audit'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: YaroslavTaranich/monino-tools-nginx
           ref: main
@@ -120,7 +120,9 @@ jobs:
               cd "$TEST_DIR"
               export APP_VERSION=verify
               COMPOSE="docker compose --project-name $TEST_PROJECT --project-directory $TEST_DIR --env-file $TEST_DIR/.env -f $TEST_DIR/docker-compose.yml -f $TEST_DIR/docker-compose.verify.yml"
-              $COMPOSE build api admin user
+              echo "=== BUILD TEST IMAGES ==="
+              $COMPOSE build --quiet api admin user
+              echo "=== START TEST POSTGRES ==="
               $COMPOSE up -d postgres
 
               POSTGRES_ID=$($COMPOSE ps -q postgres)
@@ -132,6 +134,7 @@ jobs:
               done
               [ "$STATUS" = healthy ]
 
+              echo "=== RESTORE DATABASE AND IMAGES ==="
               $COMPOSE exec -T postgres sh -c \
                 'PGPASSWORD="$POSTGRES_PASSWORD" pg_restore --clean --if-exists --create --username="$POSTGRES_USER" --dbname=postgres' \
                 < postgres.dump
@@ -139,8 +142,10 @@ jobs:
                 'find /app/static -mindepth 1 -delete && tar -C /app/static -xzf -' \
                 < static-data.tar.gz
 
+              echo "=== RUN MIGRATIONS TWICE ==="
               $COMPOSE run --rm --no-deps api npm run migration:up
               $COMPOSE run --rm --no-deps api npm run migration:up
+              echo "=== START TEST APPLICATIONS ==="
               $COMPOSE up -d --no-deps api admin user
 
               for service in api admin user; do
@@ -157,6 +162,7 @@ jobs:
                 [ "$STATUS" = healthy ]
               done
 
+              echo "=== RUN INTERNAL SMOKE TESTS ==="
               $COMPOSE exec -T api node -e \
                 "Promise.all(['/health','/category','/tools'].map(path => fetch('http://localhost:3000'+path).then(response => { if (!response.ok) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
               $COMPOSE exec -T admin wget -q --spider http://localhost/healthz
