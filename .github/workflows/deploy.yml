@@ -1,41 +1,67 @@
-name: Deploy to VPS
+name: Production operations
 
 on:
-  push:
-    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Operation to run on the VPS
+        required: true
+        type: choice
+        default: audit
+        options:
+          - audit
+          - deploy
+
+concurrency:
+  group: monino-tools-production
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  production:
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
-
     steps:
-    - uses: actions/checkout@v6
+      - name: Run production operation
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script_stop: true
+          script: |
+            set -eu
+            cd monino-tools-nginx/
 
-    - name: Use Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: "20.x"
-        cache: npm
+            if [ "${{ inputs.operation }}" = "audit" ]; then
+              echo "=== SYSTEM ==="
+              hostname
+              uname -sr
+              docker --version
+              docker compose version
+              df -h /
+              echo "=== REPOSITORY ==="
+              git branch --show-current
+              git rev-parse HEAD
+              git status --short
+              git submodule status
+              echo "=== CONFIGURATION KEYS ==="
+              if [ -f .env ]; then
+                sed -n 's/^\([A-Za-z_][A-Za-z0-9_]*\)=.*/\1=<configured>/p' .env
+              else
+                echo ".env is missing"
+              fi
+              echo "=== CONTAINERS ==="
+              docker compose ps
+              echo "=== VOLUMES ==="
+              docker volume ls --format '{{.Name}}'
+              exit 0
+            fi
 
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Build project
-      run: npm run build
-
-    - name: Deploy user frontend
-      uses: appleboy/ssh-action@v1.2.5
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        script: |
-          set -e
-          cd monino-tools-nginx/
-          git -C user fetch origin master
-          git -C user checkout --detach origin/master
-          docker compose up -d --build --no-deps user
-          docker image prune --force
-          docker builder prune --force --filter "until=168h"
+            git fetch origin main
+            git checkout main
+            git pull --ff-only origin main
+            git submodule sync --recursive
+            git submodule update --init --recursive
+            ./deploy.sh
