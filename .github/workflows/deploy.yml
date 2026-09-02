@@ -10,6 +10,7 @@ on:
         default: audit
         options:
           - audit
+          - verify
           - deploy
 
 concurrency:
@@ -29,7 +30,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
-          script_stop: true
+          command_timeout: 30m
           script: |
             set -eu
             cd monino-tools-nginx/
@@ -56,6 +57,89 @@ jobs:
               docker compose ps
               echo "=== VOLUMES ==="
               docker volume ls --format '{{.Name}}'
+              echo "=== DOCKER DISK ==="
+              docker system df
+              exit 0
+            fi
+
+            if [ "${{ inputs.operation }}" = "verify" ]; then
+              SOURCE_DIR=$PWD
+              TEST_DIR=$(mktemp -d /tmp/monino-tools-verify.XXXXXX)
+              TEST_PROJECT=monino-tools-verify-${{ github.run_id }}
+              cleanup() {
+                docker compose \
+                  --project-name "$TEST_PROJECT" \
+                  --project-directory "$TEST_DIR" \
+                  --env-file "$TEST_DIR/.env" \
+                  -f "$TEST_DIR/docker-compose.yml" \
+                  -f "$TEST_DIR/docker-compose.verify.yml" \
+                  down --volumes --remove-orphans || true
+                docker image rm \
+                  monino-tools-api:verify \
+                  monino-tools-admin:verify \
+                  monino-tools-user:verify || true
+                rm -rf "$TEST_DIR"
+              }
+              trap cleanup EXIT
+
+              git clone --recurse-submodules \
+                https://github.com/YaroslavTaranich/monino-tools-nginx.git \
+                "$TEST_DIR"
+              cp "$SOURCE_DIR/.env" "$TEST_DIR/.env"
+
+              cd "$SOURCE_DIR"
+              docker compose exec -T postgres sh -c \
+                'PGPASSWORD="$POSTGRES_PASSWORD" pg_dump --format=custom --create --username="$POSTGRES_USER" --dbname="$POSTGRES_DB"' \
+                > "$TEST_DIR/postgres.dump"
+              docker compose exec -T api tar -C /app/static -czf - . \
+                > "$TEST_DIR/static-data.tar.gz"
+
+              cd "$TEST_DIR"
+              export APP_VERSION=verify
+              COMPOSE="docker compose --project-name $TEST_PROJECT --project-directory $TEST_DIR --env-file $TEST_DIR/.env -f $TEST_DIR/docker-compose.yml -f $TEST_DIR/docker-compose.verify.yml"
+              $COMPOSE build api admin user
+              $COMPOSE up -d postgres
+
+              POSTGRES_ID=$($COMPOSE ps -q postgres)
+              for attempt in $(seq 1 30); do
+                STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$POSTGRES_ID")
+                [ "$STATUS" = healthy ] && break
+                [ "$STATUS" = unhealthy ] && exit 1
+                sleep 2
+              done
+              [ "$STATUS" = healthy ]
+
+              $COMPOSE exec -T postgres sh -c \
+                'PGPASSWORD="$POSTGRES_PASSWORD" pg_restore --clean --if-exists --create --username="$POSTGRES_USER" --dbname=postgres' \
+                < postgres.dump
+              $COMPOSE run --rm --no-deps -T api sh -c \
+                'find /app/static -mindepth 1 -delete && tar -C /app/static -xzf -' \
+                < static-data.tar.gz
+
+              $COMPOSE run --rm --no-deps api npm run migration:up
+              $COMPOSE run --rm --no-deps api npm run migration:up
+              $COMPOSE up -d --no-deps api admin user
+
+              for service in api admin user; do
+                CONTAINER_ID=$($COMPOSE ps -q "$service")
+                for attempt in $(seq 1 36); do
+                  STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_ID")
+                  [ "$STATUS" = healthy ] && break
+                  [ "$STATUS" = unhealthy ] && {
+                    $COMPOSE logs --tail=100 "$service"
+                    exit 1
+                  }
+                  sleep 5
+                done
+                [ "$STATUS" = healthy ]
+              done
+
+              $COMPOSE exec -T api node -e \
+                "Promise.all(['/health','/category','/tools'].map(path => fetch('http://localhost:3000'+path).then(response => { if (!response.ok) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
+              $COMPOSE exec -T admin wget -q --spider http://localhost/healthz
+              $COMPOSE exec -T user node -e \
+                "fetch('http://localhost:3000').then(response => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+              echo "Isolated verification passed."
               exit 0
             fi
 
