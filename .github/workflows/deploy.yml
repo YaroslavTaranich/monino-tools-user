@@ -67,13 +67,15 @@ jobs:
               TEST_DIR=$(mktemp -d /tmp/monino-tools-verify.XXXXXX)
               TEST_PROJECT=monino-tools-verify-${{ github.run_id }}
               cleanup() {
-                docker compose \
-                  --project-name "$TEST_PROJECT" \
-                  --project-directory "$TEST_DIR" \
-                  --env-file "$TEST_DIR/.env" \
-                  -f "$TEST_DIR/docker-compose.yml" \
-                  -f "$TEST_DIR/docker-compose.verify.yml" \
-                  down --volumes --remove-orphans || true
+                if [ -f "$TEST_DIR/.env" ]; then
+                  docker compose \
+                    --project-name "$TEST_PROJECT" \
+                    --project-directory "$TEST_DIR" \
+                    --env-file "$TEST_DIR/.env" \
+                    -f "$TEST_DIR/docker-compose.yml" \
+                    -f "$TEST_DIR/docker-compose.verify.yml" \
+                    down --volumes --remove-orphans || true
+                fi
                 docker image rm \
                   monino-tools-api:verify \
                   monino-tools-admin:verify \
@@ -82,12 +84,21 @@ jobs:
               }
               trap cleanup EXIT
 
-              git clone --recurse-submodules \
-                https://github.com/YaroslavTaranich/monino-tools-nginx.git \
-                "$TEST_DIR"
+              cd "$SOURCE_DIR"
+              git fetch origin main
+              git checkout main
+              git pull --ff-only origin main
+              git submodule sync --recursive
+              git submodule update --init --recursive
+
+              git archive HEAD | tar -x -C "$TEST_DIR"
+              for submodule in api admin user; do
+                mkdir -p "$TEST_DIR/$submodule"
+                git -C "$SOURCE_DIR/$submodule" archive HEAD | \
+                  tar -x -C "$TEST_DIR/$submodule"
+              done
               cp "$SOURCE_DIR/.env" "$TEST_DIR/.env"
 
-              cd "$SOURCE_DIR"
               docker compose exec -T postgres sh -c \
                 'PGPASSWORD="$POSTGRES_PASSWORD" pg_dump --format=custom --create --username="$POSTGRES_USER" --dbname="$POSTGRES_DB"' \
                 > "$TEST_DIR/postgres.dump"
