@@ -78,9 +78,6 @@ jobs:
               fi
               echo "=== CONTAINERS ==="
               docker compose ps
-              echo "=== ADMINISTRATOR ACCOUNTS ==="
-              docker compose exec -T postgres sh -c \
-                'PGPASSWORD="$POSTGRES_PASSWORD" psql --username="$POSTGRES_USER" --dbname="$POSTGRES_DB" --tuples-only --no-align --field-separator="|" --command="SELECT id, name FROM \"user\" WHERE role = '\''admin'\'' ORDER BY id"'
               echo "=== SERVICE MOUNTS ==="
               for service in postgres api; do
                 CONTAINER_ID=$(docker compose ps -q "$service")
