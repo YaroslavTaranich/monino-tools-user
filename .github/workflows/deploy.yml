@@ -187,7 +187,7 @@ jobs:
 
               echo "=== RUN INTERNAL SMOKE TESTS ==="
               $COMPOSE exec -T api node -e \
-                "Promise.all(['/health','/category','/tools'].map(path => fetch('http://localhost:3000'+path).then(response => { if (!response.ok) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
+                "Promise.all(['/health','/category','/tools','/tool-types'].map(path => fetch('http://localhost:3000'+path).then(response => { if (!response.ok) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
               $COMPOSE exec -T api node -e \
                 "Promise.all([['/auth/profile',401],['/auth/reg',404],['/user',404]].map(([path,status]) => fetch('http://localhost:3000'+path,{method:path==='/auth/reg'?'POST':'GET'}).then(response => { if (response.status !== status) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
               $COMPOSE exec -T admin wget -q --spider http://127.0.0.1/healthz

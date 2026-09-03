@@ -28,6 +28,14 @@ export interface ICategoryName {
   label: string;
 }
 
+export interface IToolType extends IDates {
+  id: number;
+  slug: string;
+  name: string;
+  sort_order: number;
+  is_active: boolean;
+}
+
 export interface ITool extends IDates {
   id: number;
   name: string;
@@ -41,6 +49,8 @@ export interface ITool extends IDates {
   price: number;
   zalog: number;
   tool_type: string;
+  tool_type_id: number | null;
+  toolType?: IToolType;
   popular: boolean;
   categoryId: number;
 }
