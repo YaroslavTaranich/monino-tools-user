@@ -154,6 +154,7 @@ jobs:
                   STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_ID")
                   [ "$STATUS" = healthy ] && break
                   [ "$STATUS" = unhealthy ] && {
+                    docker inspect --format '{{json .State.Health}}' "$CONTAINER_ID"
                     $COMPOSE logs --tail=100 "$service"
                     exit 1
                   }
@@ -165,9 +166,9 @@ jobs:
               echo "=== RUN INTERNAL SMOKE TESTS ==="
               $COMPOSE exec -T api node -e \
                 "Promise.all(['/health','/category','/tools'].map(path => fetch('http://localhost:3000'+path).then(response => { if (!response.ok) throw new Error(path+' '+response.status) }))).catch(error => { console.error(error); process.exit(1) })"
-              $COMPOSE exec -T admin wget -q --spider http://localhost/healthz
+              $COMPOSE exec -T admin wget -q --spider http://127.0.0.1/healthz
               $COMPOSE exec -T user node -e \
-                "fetch('http://localhost:3000').then(response => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+                "fetch('http://127.0.0.1:3000').then(response => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
               echo "Isolated verification passed."
               exit 0
             fi
