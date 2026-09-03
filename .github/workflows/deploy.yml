@@ -150,10 +150,27 @@ jobs:
               echo "=== RUN MIGRATIONS TWICE ==="
               $COMPOSE run --rm --no-deps api npm run migration:up
               $COMPOSE run --rm --no-deps api npm run migration:up
-              echo "=== START TEST APPLICATIONS ==="
-              $COMPOSE up -d --no-deps api admin user
+              echo "=== START TEST API ==="
+              $COMPOSE up -d --no-deps api
 
-              for service in api admin user; do
+              for service in api; do
+                CONTAINER_ID=$($COMPOSE ps -q "$service")
+                for attempt in $(seq 1 36); do
+                  STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_ID")
+                  [ "$STATUS" = healthy ] && break
+                  [ "$STATUS" = unhealthy ] && {
+                    docker inspect --format '{{json .State.Health}}' "$CONTAINER_ID"
+                    $COMPOSE logs --tail=100 "$service"
+                    exit 1
+                  }
+                  sleep 5
+                done
+                [ "$STATUS" = healthy ]
+              done
+
+              echo "=== START TEST WEB APPLICATIONS ==="
+              $COMPOSE up -d --no-deps admin user
+              for service in admin user; do
                 CONTAINER_ID=$($COMPOSE ps -q "$service")
                 for attempt in $(seq 1 36); do
                   STATUS=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_ID")
