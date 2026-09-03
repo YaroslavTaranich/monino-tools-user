@@ -74,13 +74,14 @@ jobs:
               fi
               echo "=== CONTAINERS ==="
               docker compose ps
-              echo "=== VOLUMES ==="
-              docker volume ls --format '{{.Name}}'
               echo "=== SERVICE MOUNTS ==="
               for service in postgres api; do
                 CONTAINER_ID=$(docker compose ps -q "$service")
+                echo "--- $service ---"
                 docker inspect --format '{{range .Mounts}}{{.Type}}|{{.Name}}|{{.Source}}|{{.Destination}}{{println}}{{end}}' "$CONTAINER_ID"
               done
+              echo "=== PROJECT VOLUMES ==="
+              docker volume ls --filter label=com.docker.compose.project=monino-tools-nginx --format '{{.Name}}'
               echo "=== DOCKER DISK ==="
               docker system df
               exit 0
