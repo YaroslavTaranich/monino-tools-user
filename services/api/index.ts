@@ -36,6 +36,17 @@ export interface IToolType extends IDates {
   is_active: boolean;
 }
 
+export interface IRelatedTool {
+  id: number;
+  name: string;
+  label: string;
+  image: string;
+  price: number;
+  zalog: number;
+  categoryId: number;
+  accessory_only: boolean;
+}
+
 export interface ITool extends IDates {
   id: number;
   name: string;
@@ -50,6 +61,8 @@ export interface ITool extends IDates {
   zalog: number;
   tool_type_id: number;
   toolType?: IToolType;
+  accessory_only?: boolean;
+  related_tools?: IRelatedTool[];
   popular: boolean;
   categoryId: number;
 }
@@ -81,5 +94,9 @@ export const getAllTools = async () => {
   return tools.map((tool) => ({
     ...tool,
     image: `${API_URL}file/${tool.image}`,
+    related_tools: (tool.related_tools ?? []).map((related) => ({
+      ...related,
+      image: related.image ? `${API_URL}file/${related.image}` : '',
+    })),
   }));
 };

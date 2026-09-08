@@ -2,6 +2,7 @@ import React from 'react';
 import { faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import RelatedTools from '@/components/related-tools/related-tools';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
 import { Title, Tabs } from '@/components/UI';
@@ -67,6 +68,12 @@ async function Page({ params }: IPageProps) {
       return redirect('/');
     }
 
+    const categories = await getAllCategories();
+    const relatedTools = (tool.related_tools ?? []).flatMap((related) => {
+      const category = categories.find((item) => item.id === related.categoryId);
+      return category ? [{ ...related, href: `/${category.name}/${related.name}` }] : [];
+    });
+
     const tabs = [
       {
         label: 'Характеристики',
@@ -85,6 +92,7 @@ async function Page({ params }: IPageProps) {
         <Title>{tool.title}</Title>
         <ToolOrder tool={tool} />
         <Tabs tabs={tabs} />
+        <RelatedTools tools={relatedTools} accessoryOnly={!!tool.accessory_only} />
         <Benefits />
       </>
     );

@@ -22,6 +22,7 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
       />
       <div className={styles.description}>
         <h2 className={styles.title}>{tool.label}</h2>
+        {tool.accessory_only && <p>Только с основным инструментом</p>}
         <Specification data={tool.specification} />
         <div className={styles.price}>
           <span className={styles.price__span}>
