@@ -115,3 +115,14 @@
     padding-left: 4rem;
     background-color: var(--bg-header);
 }
+
+.condition {
+    display: inline-block;
+    margin: 0 0 1.5rem;
+    padding: .8rem 1.2rem;
+    border-left: 3px solid var(--button-bg);
+    background-color: var(--card-bg);
+    color: var(--text-color-primary);
+    font-size: 1.4rem;
+    line-height: 1.5;
+}

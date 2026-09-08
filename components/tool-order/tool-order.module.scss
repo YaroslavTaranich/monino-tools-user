@@ -37,3 +37,34 @@
 .phone {
     display: inline-block;
 }
+
+
+.notice {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    width: 40rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--button-bg);
+    border-radius: 3px;
+    background-color: var(--bg-header);
+    color: var(--text-color-primary);
+    font-size: 1.6rem;
+    line-height: 1.5;
+
+    span {
+        font-size: 1.4rem;
+        color: var(--text-color-secondary);
+    }
+
+    @media screen and (max-width: 650px) {
+        margin-top: 2rem;
+        font-size: 1.8rem;
+
+        span {
+            font-size: 1.6rem;
+        }
+    }
+}

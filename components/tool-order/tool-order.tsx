@@ -13,7 +13,10 @@ function ToolOrder({ tool }: ToolOrderProps) {
     <section className={styles.order}>
       <div className={styles.order__item}>
         {tool.accessory_only && (
-          <p>Аренда только вместе с совместимым основным инструментом. Оплачивается отдельно.</p>
+          <p className={styles.notice}>
+            <strong>Только с основным инструментом</strong>
+            <span>Дополнение оплачивается отдельно по тарифу аренды.</span>
+          </p>
         )}
         <PriceSelector price={tool.price} zalog={tool.zalog} />
         <a

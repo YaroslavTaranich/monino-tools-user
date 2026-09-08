@@ -2,7 +2,7 @@ import React from 'react';
 import { faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import RelatedTools from '@/components/related-tools/related-tools';
+import { RelatedTools } from '@/components/related-tools';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
 import { Title, Tabs } from '@/components/UI';

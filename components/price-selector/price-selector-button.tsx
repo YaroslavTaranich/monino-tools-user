@@ -20,6 +20,7 @@ function PriceSelectorButton({
       type="button"
       onClick={onClick}
       aria-label={`Дней аренды: ${days}`}
+      aria-pressed={isActive}
     >
       {days}
     </button>
