@@ -47,6 +47,15 @@ export interface IRelatedTool {
   accessory_only: boolean;
 }
 
+export interface IToolImage {
+  id: number;
+  storage_key: string;
+  sort_order: number;
+  is_cover: boolean;
+  alt?: string;
+  src: string;
+}
+
 export interface ITool extends IDates {
   id: number;
   name: string;
@@ -57,6 +66,7 @@ export interface ITool extends IDates {
   specification: string;
   html_description: string;
   image: string;
+  images?: IToolImage[];
   price: number;
   zalog: number;
   tool_type_id: number;
@@ -74,7 +84,7 @@ export const getAllCategories = async () => {
     throw new Error('Не удалось загрузить категории');
   }
 
-  const categories = await res.json() as ICategory[];
+  const categories = (await res.json()) as ICategory[];
 
   return categories.map((cat) => ({
     ...cat,
@@ -94,6 +104,10 @@ export const getAllTools = async () => {
   return tools.map((tool) => ({
     ...tool,
     image: `${API_URL}file/${tool.image}`,
+    images: (tool.images ?? []).map((image) => ({
+      ...image,
+      src: `${API_URL}file/${image.storage_key}`,
+    })),
     related_tools: (tool.related_tools ?? []).map((related) => ({
       ...related,
       image: related.image ? `${API_URL}file/${related.image}` : '',

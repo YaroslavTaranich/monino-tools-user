@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { RelatedTools } from '@/components/related-tools';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
+import { ToolGallery } from '@/components/tool-gallery';
 import { Title, Tabs } from '@/components/UI';
 import { Description, Specification } from '@/components/specification';
 import { getAllCategories, getAllTools } from '@/services/api';
@@ -70,9 +71,16 @@ async function Page({ params }: IPageProps) {
 
     const categories = await getAllCategories();
     const relatedTools = (tool.related_tools ?? []).flatMap((related) => {
-      const category = categories.find((item) => item.id === related.categoryId);
-      return category ? [{ ...related, href: `/${category.name}/${related.name}` }] : [];
+      const category = categories.find(
+        (item) => item.id === related.categoryId,
+      );
+      return category
+        ? [{ ...related, href: `/${category.name}/${related.name}` }]
+        : [];
     });
+    const galleryImages = (tool.images ?? []).filter(
+      (image) => !image.is_cover,
+    );
 
     const tabs = [
       {
@@ -91,8 +99,12 @@ async function Page({ params }: IPageProps) {
       <>
         <Title>{tool.title}</Title>
         <ToolOrder tool={tool} />
+        <ToolGallery images={galleryImages} toolLabel={tool.label} />
         <Tabs tabs={tabs} />
-        <RelatedTools tools={relatedTools} accessoryOnly={!!tool.accessory_only} />
+        <RelatedTools
+          tools={relatedTools}
+          accessoryOnly={!!tool.accessory_only}
+        />
         <Benefits />
       </>
     );
