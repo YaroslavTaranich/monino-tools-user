@@ -18,9 +18,14 @@ RUN npm run build
 FROM node:20-alpine AS runner
 
 WORKDIR /app
+ARG APP_VERSION=development
+ARG VCS_REF=unknown
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+
+LABEL org.opencontainers.image.version=$APP_VERSION \
+  org.opencontainers.image.revision=$VCS_REF
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
