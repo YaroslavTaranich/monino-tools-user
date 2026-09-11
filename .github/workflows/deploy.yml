@@ -166,6 +166,8 @@ jobs:
                   monino-tools-api:verify-${{ github.run_id }} \
                   monino-tools-admin:verify-${{ github.run_id }} \
                   monino-tools-user:verify-${{ github.run_id }} || true
+                docker builder prune --force || true
+                docker image prune --force || true
                 rm -rf "$RELEASE_ROOT"
               }
               trap cleanup EXIT
@@ -270,4 +272,6 @@ jobs:
             done
             cd "$RELEASE_DIR"
             BACKUP_ROOT="$SOURCE_DIR/backups" COMPOSE_PROJECT_NAME=monino-tools-nginx ./deploy.sh
+            docker builder prune --force || true
+            docker image prune --force || true
             ln -sfn "$RELEASE_DIR" /root/monino-tools-current
