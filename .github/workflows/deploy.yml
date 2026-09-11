@@ -15,7 +15,7 @@ on:
           - rollback
       release_ref:
         description: Immutable root release tag used by verify and deploy
-        required: true
+        required: false
         type: string
 
 concurrency:
@@ -32,6 +32,17 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Validate release reference
+        if: inputs.operation == 'verify' || inputs.operation == 'deploy'
+        env:
+          RELEASE_REF: ${{ inputs.release_ref }}
+        run: |
+          test -n "$RELEASE_REF"
+          case "$RELEASE_REF" in
+            v[0-9]*.[0-9]*.[0-9]*) ;;
+            *) echo "release_ref must be an immutable SemVer tag such as v1.0.0" >&2; exit 1 ;;
+          esac
+
       - name: Check out the pinned release
         if: inputs.operation == 'verify' || inputs.operation == 'deploy'
         uses: actions/checkout@v6
