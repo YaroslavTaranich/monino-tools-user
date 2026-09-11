@@ -13,8 +13,13 @@ on:
           - verify
           - deploy
           - rollback
+          - cleanup
       release_ref:
         description: Immutable root release tag used by verify and deploy
+        required: false
+        type: string
+      cleanup_run_id:
+        description: Cancelled verify run ID to remove during cleanup
         required: false
         type: string
 
@@ -80,6 +85,34 @@ jobs:
               exit 0
             fi
 
+            if [ "${{ inputs.operation }}" = "cleanup" ]; then
+              CLEANUP_RUN_ID="${{ inputs.cleanup_run_id }}"
+              case "$CLEANUP_RUN_ID" in
+                ''|*[!0-9]*) echo "cleanup_run_id must contain digits only" >&2; exit 1 ;;
+              esac
+              TEST_PROJECT="monino-tools-verify-$CLEANUP_RUN_ID"
+              for container_id in $(docker ps -aq --filter "label=com.docker.compose.project=$TEST_PROJECT"); do
+                docker rm --force "$container_id"
+              done
+              for volume_name in $(docker volume ls -q --filter "label=com.docker.compose.project=$TEST_PROJECT"); do
+                docker volume rm "$volume_name"
+              done
+              for network_id in $(docker network ls -q --filter "label=com.docker.compose.project=$TEST_PROJECT"); do
+                docker network rm "$network_id"
+              done
+              docker image rm \
+                "monino-tools-api:verify-$CLEANUP_RUN_ID" \
+                "monino-tools-admin:verify-$CLEANUP_RUN_ID" \
+                "monino-tools-user:verify-$CLEANUP_RUN_ID" || true
+              rm -rf "/root/monino-tools-releases/$CLEANUP_RUN_ID"
+              docker builder prune --force
+              docker image prune --force
+              df -h /
+              df -ih /
+              docker system df
+              exit 0
+            fi
+
             if [ "${{ inputs.operation }}" = "audit" ]; then
               echo "=== SYSTEM ==="
               hostname
@@ -87,6 +120,7 @@ jobs:
               docker --version
               docker compose version
               df -h /
+              df -ih /
               echo "=== REPOSITORY ==="
               git branch --show-current
               git rev-parse HEAD
