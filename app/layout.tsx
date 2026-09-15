@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
 import 'normalize.css';
 import './globals.css';
 import { Suspense } from 'react';
@@ -7,11 +6,6 @@ import { Header } from '@/components/header';
 import styles from './page.module.css';
 import { Metrika } from '@/components/metrika';
 import { HOST } from '@/constants';
-
-const inter = Roboto({
-  weight: ['300', '400', '700'],
-  subsets: ['cyrillic'],
-});
 
 export const metadata: Metadata = {
   title: 'Монино Тулс - Строительный инструмент в аренду!',
@@ -29,7 +23,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href={`${HOST}/favicon.ico`} type="image/x-icon" />
       </head>
-      <body className={`${inter.className} ${styles.body}`}>
+      <body className={styles.body}>
         <Header />
         <main>{children}</main>
         <Suspense>
