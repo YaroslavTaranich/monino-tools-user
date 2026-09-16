@@ -4,6 +4,13 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [1.0.3](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.2...v1.0.3) (2026-09-16)
+
+
+### CI
+
+* automate versioned releases ([b6dff38](https://github.com/YaroslavTaranich/monino-tools-user/commit/b6dff3839bea5b3da3522333ad41e34bfe4e574b))
+
 ## [1.0.2] — 2026-09-15
 
 - Шрифт Montserrat хранится в репозитории и не загружается из Google Fonts во время сборки или работы сайта.
