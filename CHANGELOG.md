@@ -4,6 +4,14 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [1.0.4](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.3...v1.0.4) (2026-09-17)
+
+
+### Исправления
+
+* derive tool covers from gallery images ([1128d47](https://github.com/YaroslavTaranich/monino-tools-user/commit/1128d47563faa1705eab0f58f6cc22f68caac159))
+* derive tool covers from gallery images ([5c57905](https://github.com/YaroslavTaranich/monino-tools-user/commit/5c57905fa504d0c6910f8ba5d8046e52bbacddab))
+
 ## [1.0.3](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.2...v1.0.3) (2026-09-16)
 
 
