@@ -40,6 +40,7 @@ export interface IRelatedTool {
   id: number;
   name: string;
   label: string;
+  cover_image?: string;
   image: string;
   price: number;
   zalog: number;
@@ -113,7 +114,7 @@ export const getAllTools = async () => {
     })),
     related_tools: (tool.related_tools ?? []).map((related) => ({
       ...related,
-      image: related.image ? `${API_URL}file/${related.image}` : '',
+      image: related.cover_image ? `${API_URL}file/${related.cover_image}` : '',
     })),
   }));
 };
