@@ -103,7 +103,10 @@ export const getAllTools = async () => {
 
   return tools.map((tool) => ({
     ...tool,
-    image: `${API_URL}file/${tool.image}`,
+    image: (() => {
+      const cover = (tool.images ?? []).find((image) => image.is_cover);
+      return cover ? `${API_URL}file/${cover.storage_key}` : '';
+    })(),
     images: (tool.images ?? []).map((image) => ({
       ...image,
       src: `${API_URL}file/${image.storage_key}`,
