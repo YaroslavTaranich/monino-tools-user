@@ -4,6 +4,13 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [Unreleased]
+
+### CI
+
+* Добавлены ежедневные внешние backup, безопасная ротация на Яндекс Диске и
+  еженедельный изолированный restore-test.
+
 ## [2.0.0](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.4...v2.0.0) (2026-09-18)
 
 
