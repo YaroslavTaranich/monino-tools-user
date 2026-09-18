@@ -4,6 +4,17 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [2.0.0](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.4...v2.0.0) (2026-09-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* consume gallery-only related tool contract
+
+### Новые возможности
+
+* consume gallery-only related tool contract ([85ab7ec](https://github.com/YaroslavTaranich/monino-tools-user/commit/85ab7eca18d939cc9fc394019e82eb3118c7a0ca))
+
 ## [1.0.4](https://github.com/YaroslavTaranich/monino-tools-user/compare/v1.0.3...v1.0.4) (2026-09-17)
 
 
