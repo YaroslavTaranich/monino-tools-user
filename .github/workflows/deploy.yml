@@ -98,7 +98,8 @@ jobs:
               set -a
               . ./release.env
               set +a
-              BACKUP_ROOT="$STAGING_ROOT" COMPOSE_PROJECT_NAME=monino-tools-nginx ./create-backup.sh
+              export COMPOSE_PROJECT_NAME=monino-tools-nginx
+              BACKUP_ROOT="$STAGING_ROOT" ./create-backup.sh
               LATEST_BACKUP=$(find "$STAGING_ROOT" -mindepth 1 -maxdepth 1 -type d -name '????????T??????Z' | sort | tail -n 1)
               test -n "$LATEST_BACKUP"
               REMOTE_BACKUP_ROTATION_APPLY=yes ./upload-remote-backup.sh "$LATEST_BACKUP"
