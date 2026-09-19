@@ -94,7 +94,10 @@ jobs:
                 rm -rf "$STAGING_ROOT"
               }
               trap cleanup_backup_staging EXIT
-              cd /root/monino-tools-current
+              cd -P /root/monino-tools-current
+              set -a
+              . ./release.env
+              set +a
               BACKUP_ROOT="$STAGING_ROOT" COMPOSE_PROJECT_NAME=monino-tools-nginx ./create-backup.sh
               LATEST_BACKUP=$(find "$STAGING_ROOT" -mindepth 1 -maxdepth 1 -type d -name '????????T??????Z' | sort | tail -n 1)
               test -n "$LATEST_BACKUP"
@@ -103,13 +106,16 @@ jobs:
             fi
 
             if [ "$OPERATION" = "backup-rotation-dry-run" ]; then
-              cd /root/monino-tools-current
+              cd -P /root/monino-tools-current
               ./rotate-remote-backups.sh
               exit 0
             fi
 
             if [ "$OPERATION" = "backup-restore-test" ]; then
-              cd /root/monino-tools-current
+              cd -P /root/monino-tools-current
+              set -a
+              . ./release.env
+              set +a
               ./test-remote-backup-restore.sh
               exit 0
             fi
