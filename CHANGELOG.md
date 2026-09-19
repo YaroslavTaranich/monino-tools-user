@@ -4,6 +4,26 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [2.0.1](https://github.com/YaroslavTaranich/monino-tools-user/compare/v2.0.0...v2.0.1) (2026-09-19)
+
+
+### Исправления
+
+* export production compose project for backup flow ([ef52823](https://github.com/YaroslavTaranich/monino-tools-user/commit/ef528237cb50c1eb2756cd036516700babc34147))
+* export production compose project for backup flow ([b96607e](https://github.com/YaroslavTaranich/monino-tools-user/commit/b96607e2bd65ec4421898470aecf7515b0bf680a))
+* load pinned release context for backups ([389f333](https://github.com/YaroslavTaranich/monino-tools-user/commit/389f333043614dc97f6387b120f25dcea28556b7))
+* load pinned release context for backups ([a8e3e8e](https://github.com/YaroslavTaranich/monino-tools-user/commit/a8e3e8e6427c63d79ff419d7849df8324c5f014f))
+* load production database env for restore test ([d8986d4](https://github.com/YaroslavTaranich/monino-tools-user/commit/d8986d4cbcd2a65b2f68af83ee967d794848542e))
+* load production database env for restore test ([e28842d](https://github.com/YaroslavTaranich/monino-tools-user/commit/e28842d9bf8da99c4db1dbe2f512e196807450ec))
+* target production compose project for backups ([1a79787](https://github.com/YaroslavTaranich/monino-tools-user/commit/1a797878a97b34374ede0a83a4706ae026fee0f8))
+* target production compose project for backups ([ec9590f](https://github.com/YaroslavTaranich/monino-tools-user/commit/ec9590fbe2e9bc2b7c346470b61034595bc50074))
+
+
+### CI
+
+* automate external backup operations ([4069866](https://github.com/YaroslavTaranich/monino-tools-user/commit/4069866ff06de73a438f1bbf6e978c2063a0931c))
+* automate external backup operations ([84cb297](https://github.com/YaroslavTaranich/monino-tools-user/commit/84cb2971a28c7bebb07b23a357403b0592d9246e))
+
 ## [Unreleased]
 
 ### CI
