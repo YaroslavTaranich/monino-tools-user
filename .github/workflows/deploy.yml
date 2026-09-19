@@ -115,6 +115,7 @@ jobs:
             if [ "$OPERATION" = "backup-restore-test" ]; then
               cd -P /root/monino-tools-current
               set -a
+              . ./.env
               . ./release.env
               set +a
               ./test-remote-backup-restore.sh
