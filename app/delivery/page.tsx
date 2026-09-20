@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { DeliverySection } from '@/components/delivery-section';
+import styles from './page.module.scss';
 
 export const metadata: Metadata = {
   title: 'Монино-тулс - Доставка инструмента',
@@ -8,7 +9,11 @@ export const metadata: Metadata = {
 };
 
 function Page() {
-  return <DeliverySection />;
+  return (
+    <div className={styles.page}>
+      <DeliverySection />
+    </div>
+  );
 }
 
 export default Page;

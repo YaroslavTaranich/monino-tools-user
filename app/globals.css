@@ -39,16 +39,25 @@
 }
 
 :root {
-  --main-background-color: #fff9f5;
-  --brand-color: #f37021;
+  --main-background-color: #ffffff;
+  --brand-color: #df591f;
   --text-black: #111;
-  --block-background: #fdf7d1;
-  --border-color: #bfb0b0;
+  --block-background: #ffffff;
+  --border-color: #e6e6e6;
 
   --white: #fff;
 
-  --layout-max-width: 1200px;
+  --layout-max-width: 1240px;
   --card-max-width: 320px;
+
+  /* layout rhythm */
+  --section-gap: clamp(5.2rem, 6vw, 7.2rem);
+  --section-padding-block: clamp(5rem, 6vw, 7rem);
+  --section-padding-inline: clamp(1.5rem, 3vw, 3rem);
+  --section-inner-gap: clamp(2.8rem, 3vw, 3.5rem);
+  --grid-gap: clamp(1.4rem, 2vw, 2.2rem);
+  --section-radius: 2rem;
+  --card-radius: 1.2rem;
 
   /* colors */
 
@@ -59,18 +68,18 @@
   --text-color-secondary: #666;
   --text-color-primary: #333;
 
-  --bg-header: rgb(251, 244, 235);
+  --bg-header: #ffffff;
   --bg-header-dark: #58595bdd;
-  --bg-transparent: rgba(251, 244, 235, 0.85);
-  --bg-transparent-black: #6161615e;
-  --bg-color: #f8f8f8;
+  --bg-transparent: rgba(255, 255, 255, 0.92);
+  --bg-transparent-black: #f6f6f6;
+  --bg-color: #ffffff;
 
   --modile-menu-bg: #58595bd7;
 
-  --button-bg: #ecb600;
-  --button-color: #58595b;
-  --button-bg-active: #58595b;
-  --button-color-active: #f37021;
+  --button-bg: #df591f;
+  --button-color: #ffffff;
+  --button-bg-active: #c94a15;
+  --button-color-active: #df591f;
 
   --black-light-shadow: rgba(0, 0, 0, 0.05);
   --black-medium-shadow: rgba(0, 0, 0, 0.25);
@@ -80,14 +89,14 @@
   --white-medium-shadow: rgba(255, 255, 255, 0.25);
   --white-dark-shadow: rgba(255, 255, 255, 0.5);
 
-  --tabs-bg: #f9f6f3;
-  --tabs-border: rgba(250, 235, 215, 1);
-  --tabs-active: #f37021;
-  --tabs-border-hover: #f3722183;
+  --tabs-bg: #ffffff;
+  --tabs-border: #e8e8e8;
+  --tabs-active: #df591f;
+  --tabs-border-hover: #df591f;
 
-  --card-bg: rgba(250, 235, 215, 0.8);
-  --card-bg-hover: rgba(250, 235, 215, 0.89);
-  --card-bg-active: rgba(250, 235, 215, 0.979);
+  --card-bg: #ffffff;
+  --card-bg-hover: #ffffff;
+  --card-bg-active: #ffffff;
 
   --error: rgb(213, 7, 7);
 }
@@ -105,7 +114,7 @@ main {
   max-width: var(--layout-max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 8px;
+  padding: 0 20px 56px;
 }
 
 ul {
@@ -116,11 +125,16 @@ ul {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 * {
   font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
 }
 
 ul {
@@ -159,5 +173,12 @@ textarea:-webkit-autofill {
 @media (max-width: 900px) {
   html {
     font-size: 50%;
+  }
+}
+
+@media (max-width: 560px) {
+  main {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 }

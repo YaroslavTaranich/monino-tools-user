@@ -35,21 +35,23 @@ function PriceSelector({ price, zalog }: PriceSelectorProps) {
         </div>
       </div>
       <div className={styles.price}>
-        <span className={styles.price__item}>
+        <span className={styles.price__amount}>
           {currentPrice}
-          {' '}
+          {'\u00A0'}
+          <Rub />
         </span>
-        <Rub />
-        <span className={styles.price__item}> / День</span>
+        <span className={styles.price__period}>/ день</span>
       </div>
       <div className={styles.zalog}>
         <span className={styles.zalog__item}>
           Залог:
           {' '}
-          {calculateZalog(zalog, price, selected)}
-          {' '}
+          <span className={styles.zalog__value}>
+            {calculateZalog(zalog, price, selected)}
+            {'\u00A0'}
+            <Rub />
+          </span>
         </span>
-        <Rub />
       </div>
     </div>
   );

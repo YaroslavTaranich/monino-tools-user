@@ -1,14 +1,14 @@
 import React from 'react';
-import { faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { RelatedTools } from '@/components/related-tools';
 import { Benefits } from '@/components/benefits';
 import { ToolOrder } from '@/components/tool-order';
 import { ToolGallery } from '@/components/tool-gallery';
-import { Title, Tabs } from '@/components/UI';
+import { Title } from '@/components/UI';
 import { Description, Specification } from '@/components/specification';
 import { getAllCategories, getAllTools } from '@/services/api';
+import styles from './page.module.scss';
 
 export async function generateStaticParams() {
   try {
@@ -82,25 +82,20 @@ async function Page({ params }: IPageProps) {
       (image) => !image.is_cover,
     );
 
-    const tabs = [
-      {
-        label: 'Характеристики',
-        content: <Specification data={tool.specification} />,
-        icon: faGear,
-      },
-      {
-        label: 'Описание',
-        content: <Description text={tool.description} />,
-        icon: faMessage,
-      },
-    ];
-
     return (
       <>
         <Title>{tool.title}</Title>
         <ToolOrder tool={tool} />
         <ToolGallery images={galleryImages} toolLabel={tool.label} />
-        <Tabs tabs={tabs} />
+        <section className={styles.details}>
+          <article className={styles.details__card}>
+            <Specification data={tool.specification} />
+          </article>
+          <article className={styles.details__card}>
+            <h2 className={styles.details__title}>Описание</h2>
+            <Description text={tool.description} />
+          </article>
+        </section>
         <RelatedTools
           tools={relatedTools}
           accessoryOnly={!!tool.accessory_only}

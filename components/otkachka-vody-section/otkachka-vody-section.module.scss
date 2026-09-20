@@ -1,44 +1,37 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 4rem 4rem;
-  background-color: var(--bg-transparent-black);
-  gap: 2rem;
-
-
-  @media screen and (max-width: 650px) {
-    padding: 0 1rem 1rem;
-  }
+  gap: var(--section-inner-gap);
+  padding: 0;
+  background: #fff;
 }
 
 .content {
-  background-color: var(--bg-header);
-  width: 100%;
-  align-self: flex-end;
-  border-radius: 3px;
   overflow: hidden;
-  padding-top: 0;
-  margin-top: 0;
+  border: 1px solid #e8e8e8;
+  border-radius: var(--card-radius);
+  background: #fff;
 
   & p {
-    font-size: 2rem;
-    margin: 0rem;
-    padding: 1rem 2rem;
+    max-width: 88rem;
+    margin: 0 auto;
+    padding: 1rem 2.5rem;
+    color: #656565;
+    font-size: 1.7rem;
+    line-height: 1.75;
   }
 }
 
 .link {
-    display: flex;
-    justify-content: center;
-    
-  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem auto 3rem;
 }
 
 .image {
-    padding: 0;
-  border-radius: 8px;
-  width: calc(100% - 2rem);
-  height: auto;
-  margin: 1rem auto;
   display: block;
+  width: 100%;
+  height: clamp(26rem, 40vw, 48rem);
+  margin: 0 0 2rem;
+  object-fit: cover;
 }

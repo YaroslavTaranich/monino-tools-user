@@ -1,7 +1,8 @@
 .button {
     outline: none;
-    border: none;
+    border: 1px solid transparent;
     position: relative;
+    font-weight: 700;
 
     .icon {
         position: static;
@@ -13,20 +14,25 @@
 
 .primary {
     background-color: var(--button-bg);
-    font-size: 2rem;
+    color: #fff;
+    font-size: 1.7rem;
     cursor: pointer;
-    padding: 1.5rem 4rem;
-    border-radius: 3rem;
-    box-shadow: 0rem .5rem 2rem var(--black-medium-shadow);
-    transition: all .3s;
+    padding: 1.5rem 3.2rem;
+    border-radius: 4px;
+    box-shadow: 0 .8rem 2rem rgba(223, 89, 31, .18);
+    transition: background-color .2s, transform .2s, box-shadow .2s;
+
+    &,
+    &:link,
+    &:visited {
+        color: #fff;
+    }
 
     &:hover,
     &:focus {
-        padding: 1.5rem 8rem;
-        box-sizing: border-box;
-        border-collapse: collapse;
+        background-color: var(--button-bg-active);
         transform: translateY(-2px);
-        box-shadow: 0rem .5rem 2rem var(--black-dark-shadow);
+        box-shadow: 0 1.2rem 2.6rem rgba(223, 89, 31, .24);
     }
 
     &:active {
@@ -35,22 +41,20 @@
 }
 
 .secondary {
-    background-color: transparent;
-    background-image: linear-gradient(107deg, transparent 50%, #ecb600 50%);
-    background-size: 220%;
-    background-position: 0%;
-    color: #333;
-    border: 1px solid #ecb600;
-    font-size: 1.8rem;
+    background-color: #fff;
+    color: #252525;
+    border: 1px solid #dedede;
+    font-size: 1.6rem;
+    font-weight: 600;
     cursor: pointer;
-    padding: .8rem 2rem;
-    border-radius: 3px;
-    transition: all .4s ease-in-out;
+    padding: 1.1rem 2rem;
+    border-radius: 4px;
+    transition: border-color .2s, color .2s, transform .2s;
 
     &:hover,
     &:focus {
-        background-position: 100%;
-        box-shadow: 0 1rem 2rem var(--black-medium-shadow);
+        border-color: var(--brand-color);
+        color: var(--brand-color);
         transform: translateY(-1px);
     }
 
