@@ -42,8 +42,8 @@ function RelatedToolsItem({ tool, days }: RelatedToolsItemProps) {
           <div className={styles.price}>
             <span className={styles.price__value}>
               {calculatePrice(tool.price, days)}
-              {' '}
-              <Rub className={styles.price__currency} />
+              {'\u00A0'}
+              <Rub />
             </span>
             <span className={styles.price__unit}>/ сутки</span>
           </div>

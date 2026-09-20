@@ -1,86 +1,81 @@
 .wrapper {
-    width: 400px;
+    width: 100%;
     max-width: 100%;
-    color: #333;
-    padding: 2rem;
-    text-align: center;
+    padding: 0;
+    color: #252525;
+    text-align: left;
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin: 1rem 0;
-    letter-spacing: .2rem;
+    margin: 0 0 2.8rem;
+    font-size: 2.4rem;
+    font-weight: 700;
 }
 
-.tarif {
-
-    &__title {
-        color: #58595B;
-        font-size: 2rem;
-        margin-top: 4rem;
-        letter-spacing: .5rem;
-        font-weight: 300;
-    }
+.tarif__title {
+    margin: 0 0 1.4rem;
+    color: #777;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-evenly;
-    margin: 1rem 0;
+    gap: 1rem;
+    margin: 0 0 3.2rem;
+}
+
+.price,
+.zalog {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: .8rem;
+    margin: 0;
+    padding: 2.2rem 0;
+    border-top: 1px solid #e4e4e4;
+
+    &__item {
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
 }
 
 .price {
-
-    text-align: left;
-    margin-top: 5rem;
-
-    &__item {
-        font-size: 3.2rem;
+    &__amount,
+    &__period {
+        font-size: 2.8rem;
+        font-weight: 700;
+        white-space: nowrap;
     }
 }
 
-
-.zalog {
-    text-align: right;
-    margin: 3rem 0 1rem;
-
-    &__item {
-        font-size: 3.2rem;
-    }
+.zalog__value {
+    white-space: nowrap;
 }
-
-
-
 
 .button {
-    cursor: pointer;
-    font-size: 3.2rem;
-    border-radius: 50%;
-    height: 6rem;
-    width: 6rem;
-    line-height: 6rem;
-    background-color: var(--bg-header);
     display: block;
-    margin: 0rem;
-    transition: all .2s;
-    border: 1px solid var(--bg-header);
-    box-shadow: 0 1rem 1rem var(--black-medium-shadow);
+    width: 5.4rem;
+    height: 5.4rem;
+    margin: 0;
+    border: 1px solid #dedede;
+    border-radius: 50%;
+    background: #fff;
+    color: #252525;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 2.4rem;
+    line-height: 5.2rem;
+    transition: border-color .2s, color .2s, background-color .2s;
 
     &:hover,
-    &:focus {
-        transform: translateY(-1px) scale(1.02);
-        border: 1px solid var(--button-color-active);
-        box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);
-    }
-
-    &:active {
-        transform: translateY(1px);
-    }
-
+    &:focus,
     &--active {
-        border: 1px solid var(--button-color-active);
-        background-color: var(--button-bg);
-        transition: all .4s;
+        border-color: var(--brand-color);
+        background: var(--brand-color);
+        color: #fff;
     }
 }

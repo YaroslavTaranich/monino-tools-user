@@ -26,12 +26,12 @@
     width: 40%;
     font-size: 2rem;
     padding: .8rem 1rem;
-    border-radius: 3px;
-    border: 1px solid var(--black-light-shadow);
+    border-radius: 5px;
+    border: 1px solid #dedede;
     transition: all .4s;
     outline: none;
     letter-spacing: .15rem;
-    box-shadow: 0rem 1rem 1rem var(--black-light-shadow);
+    box-shadow: none;
 
 
     &::placeholder {
@@ -41,7 +41,7 @@
 
     &:focus {
         border: 1px solid var(--button-bg);
-        box-shadow: 0 0 0 1px var(--button-bg), 0rem 1rem 1rem var(--black-light-shadow);
+        box-shadow: 0 0 0 2px rgba(223, 89, 31, .12);
     }
 
     &::-webkit-calendar-picker-indicator {

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ITool } from '@/services/api';
 import { Rub } from '../UI';
-import { Specification } from '../specification';
 import styles from './tools-list.module.scss';
 
 interface ToolsListItemProps {
@@ -17,7 +16,7 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
         width={400}
         height={400}
         src={tool.image}
-        alt={tool.name}
+        alt={tool.label}
         className={styles.pic}
       />
       <div className={styles.description}>
@@ -25,15 +24,21 @@ function ToolsListItem({ tool, url }: ToolsListItemProps) {
         {tool.accessory_only && (
           <p className={styles.condition}>Только с основным инструментом</p>
         )}
-        <Specification data={tool.specification} />
+        <p className={styles.summary}>
+          {tool.description.split('\n').find(Boolean) || tool.title}
+        </p>
         <div className={styles.price}>
-          <span className={styles.price__span}>
-            от
-            {' '}
-            {tool.price}
+          <span>
+            <span className={styles.price__span}>
+              от
+              {' '}
+              {tool.price}
+            </span>
+            {'\u00A0'}
+            <Rub />
+            <span className={styles.price__unit}> / сутки</span>
           </span>
-          <Rub />
-          <span className={styles.price__span}> / сутки</span>
+          <span className={styles.more}>Подробнее →</span>
         </div>
       </div>
     </Link>

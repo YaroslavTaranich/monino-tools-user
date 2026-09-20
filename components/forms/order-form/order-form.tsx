@@ -220,7 +220,7 @@ function OrderForm({ tool }: IOrderFormProps) {
         <div className={styles.price__label}>Стоимость аренды:</div>
         <div className={styles.price__number}>
           {calculatePrice(tool.price, days) * days}
-          {' '}
+          {'\u00A0'}
           <Rub />
         </div>
       </div>
@@ -228,7 +228,7 @@ function OrderForm({ tool }: IOrderFormProps) {
         <div className={styles.price__label}>Сумма залога:</div>
         <div className={styles.price__number}>
           {calculateZalog(tool.zalog, tool.price, days)}
-          {' '}
+          {'\u00A0'}
           <Rub />
         </div>
       </div>

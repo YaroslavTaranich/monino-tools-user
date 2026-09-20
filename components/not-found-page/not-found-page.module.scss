@@ -6,9 +6,11 @@
     margin: 2rem auto;
     gap: 3rem;
     width: 100%;
-    background-color: var(--bg-header);
-    padding: 2rem;
-    border-radius: 1rem;
+    min-height: 58rem;
+    background: #f8f8f8;
+    padding: 5rem 2rem;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
 
 
     &__title {
