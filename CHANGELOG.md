@@ -4,6 +4,14 @@
 основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/), версии следуют
 SemVer.
 
+## [2.1.0](https://github.com/YaroslavTaranich/monino-tools-user/compare/v2.0.1...v2.1.0) (2026-09-20)
+
+
+### Новые возможности
+
+* refresh user site visual design ([55bf109](https://github.com/YaroslavTaranich/monino-tools-user/commit/55bf109e9a196df37d43721e02243a41084768ed))
+* refresh user site visual design ([caf08de](https://github.com/YaroslavTaranich/monino-tools-user/commit/caf08de5b5b23a059f788cccf3a9b70a32be7b93))
+
 ## [2.0.1](https://github.com/YaroslavTaranich/monino-tools-user/compare/v2.0.0...v2.0.1) (2026-09-19)
 
 
